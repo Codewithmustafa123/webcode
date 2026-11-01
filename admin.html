@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - WEBCODE Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & VARIABLES ============ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy-dark: #081431;
+  --hero-blue: #0c2054;
+  --button-blue: #0f2557;
+  --gold: #f5b301;
+  --text-dark: #1e293b;
+  --text-gray: #64748b;
+  --bg-white: #ffffff;
+  --border-color: #e2e8f0;
+  --font-main: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--navy-dark);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  margin: 0;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background Decorative Shapes */
+body::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 10%;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============ LEFT PANEL (LOGIN FORM) ============ */
+.left-panel {
+  flex: 0 0 48%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding: 100px 40px 60px;
+}
+
+.login-card {
+  background-color: var(--bg-white);
+  width: 100%;
+  max-width: 440px;
+  padding: 65px 45px 40px;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+  position: relative;
+  text-align: center;
+}
+
+/* Floating Logo */
+.logo-wrapper {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background-color: var(--bg-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 5px solid var(--bg-white);
+  overflow: hidden;
+  transition: all 0.4s ease; /* Smooth transition for hover effect */
+  cursor: pointer;
+}
+
+/* Logo Image */
+.custom-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease; /* Smooth zoom for image */
+}
+
+/* HOVER EFFECT ON LOGO */
+.logo-wrapper:hover {
+  border-color: var(--gold); /* Border turns Gold */
+  box-shadow: 0 15px 35px rgba(245, 179, 1, 0.3); /* Golden shadow glow */
+}
+
+.logo-wrapper:hover .custom-logo-img {
+  transform: scale(1.15); /* Image zooms in slightly */
+}
+
+/* Typography */
+.panel-tag {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-bottom: 8px;
+}
+
+.login-card h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--button-blue);
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.login-card p.subtitle {
+  font-size: 14px;
+  color: var(--text-gray);
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* Form Inputs */
+.form-group {
+  text-align: left;
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--button-blue);
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 15px 18px;
+  font-size: 14.5px;
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.form-group input:focus {
+  border-color: var(--button-blue);
+  box-shadow: 0 0 0 4px rgba(15, 37, 87, 0.1);
+}
+
+/* Button */
+.btn-login {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--button-blue);
+  color: var(--bg-white);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-main);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(15, 37, 87, 0.2);
+}
+
+.btn-login:hover {
+  background-color: var(--navy-dark);
+  transform: translateY(-2px);
+}
+
+/* Back Link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--button-blue);
+  text-decoration: none;
+  transition: color 0.3s;
+  margin-bottom: 35px;
+}
+
+.back-link:hover {
+  color: var(--gold);
+}
+
+/* Footer Copyright */
+.copyright {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* ============ RIGHT PANEL (IMAGE) ============ */
+.right-panel {
+  flex: 1;
+  border-radius: 250px 0 0 250px;
+  position: relative;
+  margin: 0;
+  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  overflow: hidden;
+  background-color: var(--navy-dark);
+}
+
+.right-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./cnter.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+
+.right-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 20, 49, 0.15);
+  transition: background 0.6s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.right-panel:hover::after {
+  transform: scale(1.08);
+}
+
+.right-panel:hover::before {
+  background: rgba(8, 20, 49, 0.05);
+}
+
+.right-panel:hover {
+  box-shadow: -30px 0 60px rgba(0, 0, 0, 0.6);
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+@media (max-width: 1100px) {
+  .right-panel {
+    border-radius: 180px 0 0 180px;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+  
+  .left-panel {
+    flex: 1;
+    padding: 100px 20px 60px;
+    width: 100%;
+  }
+
+  .right-panel {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-panel {
+    padding: 90px 15px 40px;
+  }
+  
+  .login-card {
+    padding: 55px 25px 30px;
+  }
+  
+  .logo-wrapper {
+    width: 90px;
+    height: 90px;
+    top: -45px;
+  }
+  
+  .login-card h1 {
+    font-size: 26px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <!-- LEFT PANEL: LOGIN FORM -->
+  <div class="left-panel">
+    <div class="login-card">
+      
+      <!-- Floating Logo -->
+      <div class="logo-wrapper">
+        <img src="./logo.png" alt="WEBCODE Logo" class="custom-logo-img">
+      </div>
+
+      <!-- Text Content -->
+      <span class="panel-tag">Administration Panel</span>
+      <h1>Welcome Back</h1>
+      <p class="subtitle">Login to manage WebCode Institute admissions.</p>
+
+      <!-- Form -->
+      <form onsubmit="event.preventDefault(); alert('Login Attempted');">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter admin username" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter admin password" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn-login">Login to Dashboard</button>
+      </form>
+
+      <!-- Back Link -->
+      <a href="index.html" class="back-link">
+        &larr; Back to Website
+      </a>
+
+      <p class="copyright">© 2026 WebCode Institute of IT &amp; Languages</p>
+
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL: BACKGROUND IMAGE -->
+  <div class="right-panel"></div>
+
+</body>
+</html>

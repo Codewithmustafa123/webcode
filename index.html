@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEBCODE Institute — Education That Prepares You For Tomorrow</title>
+<meta name="description" content="WEBCODE Institute — professional IT and design education. Courses in web development, UI/UX design and digital marketing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & VARIABLES
+   ============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --navy-dark: #071026;
+  --heading-blue: #0f2557;
+  --gold: #f5b301;
+  --gold-hover: #e0a200;
+  --text-dark: #1e293b;
+  --text-gray: #64748b;
+  --bg-white: #ffffff;
+  --bg-light: #f8fafc;
+  --border-color: #e2e8f0;
+  --font-main: 'Poppins', sans-serif;
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  line-height: 1.6;
+  background-color: var(--bg-white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+img{max-width:100%;display:block;object-fit: cover;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+h1,h2,h3,h4,h5{line-height:1.25;font-weight:700;letter-spacing:-.015em}
+
+.container{width:100%;max-width:1250px;margin:0 auto;padding:0 24px}
+section{padding:90px 0;position:relative}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-main);font-weight:600;font-size:.9rem;
+  padding:12px 26px;border-radius:6px;transition:.3s ease;
+  border:2px solid transparent;white-space:nowrap;line-height:1.2;
+}
+.btn-gold{background:var(--gold);color:var(--navy-dark);}
+.btn-gold:hover{background:var(--gold-hover);transform:translateY(-2px);}
+.btn-navy{background:var(--navy-dark);color:#fff;}
+.btn-navy:hover{background:var(--heading-blue);transform:translateY(-2px);}
+.btn-outline{border-color:var(--border-color);color:var(--text-dark);background:transparent;}
+.btn-outline:hover{background:var(--navy-dark);color:#fff;border-color:var(--navy-dark);transform:translateY(-2px);}
+
+/* ============================================================
+   TOP BAR & NAVBAR
+   ============================================================ */
+.topbar { background-color: var(--navy-dark); color: #e2e8f0; font-size: 12px; padding: 8px 0; }
+.topbar .container { display: flex; justify-content: space-between; align-items: center; }
+.topbar-left { display: flex; gap: 20px; }
+.topbar-item { display: flex; align-items: center; gap: 6px; transition: color 0.3s; }
+.topbar-item:hover { color: var(--gold); }
+.topbar-item svg { width: 12px; height: 12px; fill: var(--gold); }
+
+.navbar {
+  background-color: var(--bg-white);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky; top: 0; z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+.navbar .container { display: flex; justify-content: space-between; align-items: center; }
+
+/* Logo */
+.logo-wrap { display: flex; align-items: center; gap: 10px; }
+.logo-icon {
+  width: 48px; height: 48px; background-color: var(--bg-white); border: 2px solid var(--text-dark); border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;
+}
+.logo-icon::before { content: ''; position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px; border: 1px solid var(--text-dark); border-radius: 50%; pointer-events: none; }
+.logo-icon span { font-size: 5px; font-weight: 700; text-transform: uppercase; color: var(--text-dark); line-height: 1.1; text-align: center; }
+.logo-icon .logo-main-text { font-size: 10px; font-weight: 800; }
+.logo-text-group { display: flex; flex-direction: column; }
+.logo-title { font-size: 20px; font-weight: 800; color: var(--text-dark); line-height: 1.1; letter-spacing: -0.5px; }
+.logo-subtitle { font-size: 8px; font-weight: 600; color: var(--text-gray); letter-spacing: 1px; text-transform: uppercase; }
+
+/* Nav Links */
+.nav-links { display: flex; gap: 24px; }
+.nav-links a { font-size: 13px; font-weight: 500; color: var(--text-dark); transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold); font-weight: 600; }
+
+/* Nav Actions */
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+.btn-header {
+  display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: 5px;
+  transition: all 0.3s ease; cursor: pointer; border: none; font-family: var(--font-main); background-color: var(--gold); color: var(--navy-dark);
+}
+.btn-header:hover { background-color: var(--gold-hover); transform: translateY(-2px); }
+
+.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.mobile-menu-btn span { display: block; width: 24px; height: 2px; background-color: var(--text-dark); border-radius: 2px; }
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero { position: relative; height: 70vh; min-height: 500px; max-height: 650px; overflow: hidden; display: flex; align-items: center; background-color: var(--navy-dark); }
+.hero-slide { position: absolute; inset: 0; display: flex; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s; }
+.hero-slide.active { opacity: 1; visibility: visible; }
+.hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.05); transition: transform 8s linear; }
+.hero-slide.active .hero-bg { transform: scale(1.12); }
+.hero-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,16,38,0.9) 0%, rgba(7,16,38,0.6) 50%, rgba(7,16,38,0.2) 100%); }
+
+.hero .container { position: relative; z-index: 3; width: 100%; }
+.hero-content { max-width: 650px; color: #fff; }
+.hero-tag { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.hero-tag::before { content: ''; width: 30px; height: 2px; background: var(--gold); }
+.hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.1; color: #fff; }
+.hero h1 em { font-style: normal; color: var(--gold); display: block; }
+.hero p { font-size: 16px; color: #e2e8f0; max-width: 500px; margin-bottom: 30px; line-height: 1.7; }
+.hero-btns { display: flex; gap: 12px; }
+
+.hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 6; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); display: grid; place-items: center; transition: 0.3s; backdrop-filter: blur(4px); }
+.hero-arrow:hover { background: var(--gold); border-color: var(--gold); }
+.hero-arrow svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2.5; transition: 0.3s; }
+.hero-arrow:hover svg { stroke: var(--navy-dark); }
+.hero-arrow.prev { left: 20px; } .hero-arrow.next { right: 20px; }
+.hero-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 6; display: flex; gap: 8px; }
+.hero-dots button { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: 0.3s; }
+.hero-dots button.active { width: 24px; border-radius: 10px; background: var(--gold); }
+
+/* ============================================================
+   WELCOME SECTION
+   ============================================================ */
+.welcome { background: var(--bg-white); text-align: center; }
+.section-tag { color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
+.section-title { font-size: 36px; font-weight: 800; color: var(--navy-dark); margin-bottom: 16px; letter-spacing: -0.5px; }
+.section-title span { color: var(--gold); }
+.section-desc { max-width: 700px; margin: 0 auto 60px; color: var(--text-gray); font-size: 15px; line-height: 1.7; }
+.welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; text-align: left; align-items: center; }
+
+.feature-box { background: var(--navy-dark); border-radius: 16px; padding: 40px; color: #fff; box-shadow: 0 20px 40px rgba(7,16,38,0.2); }
+.feature-item { margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; }
+.feature-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+.feature-num { font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+.feature-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; color: #fff; }
+.feature-text { font-size: 13px; color: #94a3b8; }
+
+.welcome-content h3 { font-size: 32px; font-weight: 800; color: var(--navy-dark); margin-bottom: 16px; line-height: 1.2; }
+.welcome-content h3 span { color: var(--gold); }
+.welcome-content p { color: var(--text-gray); font-size: 15px; margin-bottom: 16px; line-height: 1.8; }
+.link-arrow { color: var(--gold); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.3s; }
+.link-arrow:hover { gap: 10px; }
+
+/* ============================================================
+   COURSES SECTION (UNIFORM CARDS + PREMIUM HOVER)
+   ============================================================ */
+.courses { background: var(--bg-light); }
+.course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+/* Card Main Style */
+.course-card {
+  background: var(--bg-white); border-radius: 16px; padding: 30px 24px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
+  position: relative; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+  z-index: 1; overflow: hidden;
+}
+
+/* Blue Background Fill Effect */
+.course-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0;
+  background-color: var(--heading-blue); transition: height 0.4s ease; z-index: -1;
+}
+
+/* Premium Hover Border & Shadow for ALL cards */
+.course-card:hover { 
+  transform: translateY(-12px) scale(1.02); 
+  box-shadow: 0 0 25px rgba(245, 179, 1, 0.4), 0 30px 60px rgba(0,0,0,0.15); 
+  border-color: var(--gold); 
+}
+.course-card:hover::before { height: 100%; }
+
+.course-card > * { position: relative; z-index: 2; transition: color 0.4s ease; }
+.course-icon { width: 50px; height: 50px; margin-bottom: 20px; transition: transform 0.4s ease; }
+.course-icon svg { width: 100%; height: 100%; fill: var(--gold); }
+.course-card:hover .course-icon { transform: scale(1.15) rotate(-5deg); }
+
+.course-num { position: absolute; top: 20px; right: 20px; font-size: 40px; font-weight: 800; color: #f1f5f9; line-height: 1; transition: color 0.4s; }
+.course-card:hover .course-num { color: rgba(255,255,255,0.1); }
+
+.course-tag { font-size: 11px; font-weight: 600; color: var(--text-gray); text-transform: uppercase; margin-bottom: 8px; display: block; transition: color 0.4s; }
+.course-card:hover .course-tag { color: var(--gold); }
+
+.course-title { font-size: 20px; font-weight: 700; color: var(--navy-dark); margin-bottom: 12px; transition: color 0.4s; }
+.course-card:hover .course-title { color: #ffffff; }
+
+.course-desc { font-size: 13px; color: var(--text-gray); margin-bottom: 20px; line-height: 1.6; min-height: 60px; transition: color 0.4s; }
+.course-card:hover .course-desc { color: #cbd5e1; }
+
+.course-features { list-style: none; margin-bottom: 24px; }
+.course-features li { font-size: 13px; color: var(--text-dark); display: flex; align-items: center; gap: 8px; margin-bottom: 8px; transition: color 0.4s; }
+.course-features li::before { content: '✓'; color: var(--gold); font-weight: bold; }
+.course-card:hover .course-features li { color: #ffffff; }
+
+.btn-apply { font-size: 13px; font-weight: 600; color: var(--text-dark); display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; }
+.course-card:hover .btn-apply { color: var(--gold); gap: 12px; }
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+.about { background: var(--bg-white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.about-img-wrapper { position: relative; }
+.about-img { width: 100%; height: 400px; border-radius: 20px; object-fit: cover; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.about-badge { position: absolute; bottom: -20px; right: -20px; background: var(--navy-dark); color: #fff; padding: 24px; border-radius: 16px; text-align: center; border: 4px solid #fff; }
+.about-badge strong { font-size: 28px; font-weight: 800; color: var(--gold); display: block; line-height: 1; margin-bottom: 4px; }
+.about-badge small { font-size: 11px; text-transform: uppercase; font-weight: 500; opacity: 0.8; }
+.about-content h3 { font-size: 32px; font-weight: 800; color: var(--navy-dark); margin-bottom: 16px; line-height: 1.2; }
+.about-content h3 span { color: var(--gold); }
+.about-content p { color: var(--text-gray); font-size: 15px; margin-bottom: 24px; line-height: 1.8; }
+.mini-cards { display: flex; gap: 16px; margin-bottom: 30px; }
+.mini-card { background: var(--bg-light); padding: 16px; border-radius: 12px; flex: 1; display: flex; align-items: flex-start; gap: 12px; }
+.mini-card svg { width: 24px; height: 24px; fill: var(--gold); flex-shrink: 0; }
+.mini-card h4 { font-size: 14px; font-weight: 600; color: var(--navy-dark); margin-bottom: 4px; }
+.mini-card p { font-size: 11px; margin: 0; line-height: 1.4; }
+
+/* ============================================================
+   STATS SECTION
+   ============================================================ */
+.stats { padding: 60px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); background: var(--bg-white); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
+.stat-item h3 { font-size: 36px; font-weight: 800; color: var(--navy-dark); margin-bottom: 4px; }
+.stat-item p { font-size: 13px; font-weight: 500; color: var(--text-gray); margin: 0; }
+.stat-item:not(:last-child) { border-right: 1px solid var(--border-color); }
+
+/* ============================================================
+   WHY CHOOSE SECTION
+   ============================================================ */
+.why { background: var(--navy-dark); color: #fff; }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.why-content h3 { font-size: 36px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; color: #fff; }
+.why-content h3 span { color: var(--gold); }
+.why-content > p { color: #94a3b8; font-size: 15px; margin-bottom: 40px; line-height: 1.8; }
+.why-feature { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+.why-icon { width: 44px; height: 44px; background: rgba(245,179,1,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.why-icon svg { width: 20px; height: 20px; fill: var(--gold); }
+.why-feature h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #fff; }
+.why-feature p { font-size: 13px; color: #94a3b8; margin: 0; }
+.why-graphic { background: linear-gradient(135deg, #1e3a8a, #0f2557); border-radius: 24px; padding: 40px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); }
+.why-graphic-badge { position: absolute; top: 20px; right: 20px; background: #fff; color: var(--navy-dark); padding: 8px 16px; border-radius: 8px; font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.why-graphic-badge svg { width: 14px; height: 14px; fill: var(--gold); }
+.why-graphic-icon { width: 60px; height: 60px; background: var(--gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+.why-graphic-icon svg { width: 30px; height: 30px; fill: var(--navy-dark); }
+.why-graphic h2 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; color: #fff; }
+.why-graphic h2 span { color: var(--gold); }
+.why-graphic p { font-size: 13px; color: #94a3b8; margin-bottom: 30px; }
+.why-mini-badge { position: absolute; bottom: 20px; left: 20px; background: #fff; color: var(--navy-dark); padding: 10px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.why-mini-badge span { font-size: 20px; font-weight: 800; color: var(--gold); line-height: 1; }
+
+/* ============================================================
+   TESTIMONIALS SECTION
+   ============================================================ */
+.testimonials { background: var(--bg-white); text-align: center; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: center; margin-top: 50px; }
+.testimonial-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; text-align: left; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+.testimonial-card.active { background: var(--navy-dark); color: #fff; border-color: var(--navy-dark); transform: scale(1.05); box-shadow: 0 20px 40px rgba(7,16,38,0.3); z-index: 2; }
+.testimonial-card.active .quote-icon { color: var(--gold); }
+.quote-icon { font-size: 40px; color: #e2e8f0; font-family: serif; line-height: 1; margin-bottom: 10px; }
+.stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-bottom: 16px; }
+.testimonial-card p { font-size: 14px; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+.testimonial-card.active p { color: #e2e8f0; }
+.user-info { display: flex; align-items: center; gap: 12px; }
+.user-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: var(--navy-dark); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+.user-info h4 { font-size: 14px; font-weight: 600; margin: 0; }
+.user-info p { font-size: 11px; color: var(--text-gray); margin: 0; }
+.testimonial-card.active .user-info p { color: #94a3b8; }
+
+/* ============================================================
+   GALLERY SECTION
+   ============================================================ */
+.gallery { background: var(--bg-light); text-align: center; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 200px); gap: 16px; margin-top: 50px; margin-bottom: 40px; }
+.gallery-item { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,16,38,0.8) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; text-align: left; }
+.gallery-overlay span { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.gallery-overlay h4 { font-size: 16px; font-weight: 600; color: #fff; margin: 0; }
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+.gallery-item:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+.gallery-item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+.gallery-item:nth-child(5) { grid-column: span 1; grid-row: span 1; }
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+.cta { background: var(--bg-white); padding: 0 0 90px; }
+.cta-box { background: linear-gradient(135deg, #0f2557, #071026); border-radius: 24px; padding: 60px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(7,16,38,0.3); }
+.cta-box::before { content: ''; position: absolute; top: -50%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,179,1,0.15) 0%, transparent 70%); border-radius: 50%; }
+.cta-text { position: relative; z-index: 2; max-width: 600px; }
+.cta-text .tag { font-size: 12px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; display: block; }
+.cta-text h2 { font-size: 40px; font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+.cta-text h2 span { color: var(--gold); }
+.cta-text p { color: #94a3b8; font-size: 15px; margin-bottom: 30px; }
+.cta-btns { display: flex; gap: 12px; }
+.cta-circle { position: relative; z-index: 2; width: 180px; height: 180px; background: var(--gold); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--navy-dark); text-align: center; box-shadow: 0 20px 40px rgba(245,179,1,0.4); border: 8px solid rgba(255,255,255,0.1); }
+.cta-circle svg { width: 40px; height: 40px; fill: var(--navy-dark); margin-bottom: 8px; }
+.cta-circle h4 { font-size: 14px; font-weight: 800; line-height: 1.2; margin: 0; text-transform: uppercase; color: var(--navy-dark); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer { background: var(--navy-dark); color: #94a3b8; padding-top: 70px; border-top: 4px solid var(--gold); }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; padding-bottom: 50px; }
+.footer-logo .logo-icon { background-color: #fff !important; border-color: #fff !important; }
+.footer-logo .logo-icon::before { border-color: var(--navy-dark) !important; }
+.footer-logo .logo-icon span { color: var(--navy-dark) !important; }
+.footer-logo .logo-title { color: #fff !important; }
+.footer-logo .logo-subtitle { color: #94a3b8 !important; }
+.footer-desc { font-size: 13px; line-height: 1.7; margin: 20px 0; max-width: 280px; color: #94a3b8; }
+.social-links { display: flex; gap: 10px; }
+.social-links a { width: 32px; height: 32px; background: rgba(255,255,255,0.08); border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+.social-links a:hover { background: var(--gold); transform: translateY(-3px); }
+.social-links svg { width: 14px; height: 14px; fill: #fff; transition: 0.3s; }
+.social-links a:hover svg { fill: var(--navy-dark); }
+.footer-col h4 { color: #fff; font-size: 16px; font-weight: 600; margin-bottom: 20px; position: relative; padding-bottom: 10px; }
+.footer-col h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 30px; height: 2px; background: var(--gold); }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a { font-size: 13px; display: flex; align-items: center; gap: 6px; transition: 0.3s; color: #94a3b8; }
+.footer-links a:hover { color: var(--gold); transform: translateX(4px); }
+.footer-links a::before { content: '›'; color: var(--gold); font-size: 16px; line-height: 1; }
+.footer-contact li { display: flex; gap: 12px; margin-bottom: 16px; font-size: 13px; line-height: 1.6; color: #94a3b8; }
+.footer-contact svg { width: 16px; height: 16px; fill: var(--gold); flex-shrink: 0; margin-top: 3px; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
+.footer-bottom .container { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #94a3b8; }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a:hover { color: var(--gold); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .welcome-grid, .about-grid, .why-grid { grid-template-columns: 1fr; gap: 40px; }
+  .course-grid, .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: 180px;
+    margin-top: 40px;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+
+  .cta-box { flex-direction: column; text-align: center; gap: 40px; padding: 50px 40px; }
+  .cta-text { max-width: 100%; }
+  .cta-btns { justify-content: center; }
+
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item { padding: 15px 0; }
+  .stat-item:nth-child(2), .stat-item:nth-child(4) { border-right: none; }
+  .stat-item:nth-child(1), .stat-item:nth-child(2) { border-bottom: 1px solid var(--border-color); }
+
+  .section-title { font-size: 32px; }
+  .welcome-content h3, .about-content h3, .why-content h3 { font-size: 28px; }
+  .cta-text h2 { font-size: 32px; }
+}
+
+/* ---------- Mobile (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  section { padding: 60px 0; }
+  .container { padding: 0 18px; }
+
+  /* Topbar & Nav */
+  .topbar { display: none; }
+  .nav-links, .nav-actions { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-white);
+    padding: 10px 18px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 999;
+  }
+  .nav-links.active a { padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
+  .nav-links.active a:last-child { border-bottom: none; }
+
+  /* Hero — height bug fix */
+  .hero { height: auto; min-height: 500px; max-height: none; padding: 0; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 14px; margin-bottom: 24px; }
+  .hero-tag { font-size: 11px; }
+  .hero-arrow { display: none; }
+  .hero-btns { flex-wrap: wrap; }
+  .hero-btns .btn { flex: 1 1 auto; justify-content: center; }
+  .hero-dots { bottom: 14px; }
+
+  /* Typography */
+  .section-title { font-size: 26px; }
+  .section-desc { font-size: 14px; margin-bottom: 36px; }
+  .welcome-content h3, .about-content h3, .why-content h3 { font-size: 24px; }
+  .cta-text h2 { font-size: 26px; }
+
+  /* Grids */
+  .course-grid, .testimonial-grid { grid-template-columns: 1fr; gap: 20px; }
+  .stats-grid { grid-template-columns: 1fr; gap: 0; }
+  .stats .stat-item {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 18px 0;
+    margin: 0;
+  }
+  .stats .stat-item:last-child { border-bottom: none; }
+
+  /* Welcome */
+  .feature-box { padding: 28px; }
+
+  /* About */
+  .about-img { height: 300px; }
+  .about-badge { bottom: 10px; right: 10px; padding: 16px 20px; border-width: 3px; }
+  .about-badge strong { font-size: 22px; }
+  .about-badge small { font-size: 10px; }
+  .mini-cards { flex-direction: column; gap: 12px; }
+
+  /* Why */
+  .why-graphic { padding: 30px 24px; border-radius: 18px; }
+  .why-graphic h2 { font-size: 24px; }
+  .why-graphic-badge { font-size: 10px; padding: 6px 12px; top: 14px; right: 14px; }
+  .why-graphic-icon { width: 50px; height: 50px; margin-bottom: 18px; }
+  .why-graphic-icon svg { width: 24px; height: 24px; }
+  .why-mini-badge { bottom: 12px; left: 12px; padding: 8px 12px; font-size: 11px; }
+  .why-mini-badge span { font-size: 16px; }
+
+  /* Testimonials */
+  .testimonial-card { padding: 24px; }
+  .testimonial-card.active { transform: none; }
+  .testimonial-grid { margin-top: 30px; }
+
+  /* Gallery */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: 220px;
+    gap: 14px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+  .gallery-overlay h4 { font-size: 15px; }
+
+  /* CTA */
+  .cta { padding-bottom: 60px; }
+  .cta-box { padding: 36px 22px; border-radius: 18px; }
+  .cta-btns { flex-wrap: wrap; justify-content: center; }
+  .cta-btns .btn { flex: 1 1 auto; justify-content: center; }
+  .cta-circle { width: 140px; height: 140px; border-width: 6px; }
+  .cta-circle svg { width: 30px; height: 30px; }
+  .cta-circle h4 { font-size: 12px; }
+
+  /* Footer */
+  .footer { padding-top: 50px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; padding-bottom: 30px; }
+  .footer-bottom .container { flex-direction: column; gap: 10px; text-align: center; }
+  .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+  .footer-desc { max-width: 100%; }
+}
+
+/* ---------- Small phones (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.7rem; }
+  .hero-btns .btn { width: 100%; }
+  .section-title { font-size: 22px; }
+  .welcome-content h3, .about-content h3, .why-content h3 { font-size: 20px; }
+  .cta-text h2 { font-size: 22px; }
+  .course-title { font-size: 18px; }
+  .logo-icon { width: 42px; height: 42px; }
+  .logo-title { font-size: 17px; }
+  .logo-subtitle { font-size: 7px; letter-spacing: 0.5px; }
+  .cta-box { padding: 30px 18px; }
+  .about-badge { padding: 12px 14px; }
+  .about-badge strong { font-size: 18px; }
+  .footer-col h4 { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="tel:+923101391632" class="topbar-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>+92 3101391632</span>
+      </a>
+      <a href="mailto:Webcodeinstitute2025@gmail.com" class="topbar-item">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+        <span>Webcodeinstitute2025@gmail.com</span>
+      </a>
+    </div>
+    <div class="topbar-right">
+      <span>Professional IT &amp; Language Education</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar">
+  <div class="container">
+    <a href="./index.html" class="logo-wrap">
+      <div class="logo-icon">
+        <span>WEB</span>
+        <span class="logo-main-text">CODE</span>
+        <span>INSTITUTE</span>
+      </div>
+      <div class="logo-text-group">
+        <div class="logo-title">WEBCODE</div>
+        <div class="logo-subtitle">Institute of IT &amp; Languages</div>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="./index.html" class="active">Home</a></li>
+      <li><a href="./about-us.html">About Us</a></li>
+      <li><a href="./Courses.html">Courses</a></li>
+      <li><a href="./Admissions.html">Admissions</a></li>
+      <li><a href="./Faculty.html">Faculty</a></li>
+      <li><a href="./Gallery.html">Gallery</a></li>
+      <li><a href="./Contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="./Admissions.html" class="btn-header">Apply Now</a>
+      <a href="./admin.html" class="btn-header">Admin Login</a>
+    </div>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO SECTION ============ -->
+<section class="hero" id="home">
+  <div class="hero-slide active">
+    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1920&auto=format&fit=crop');"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag">PRACTICAL • MODERN • CAREER FOCUSED</div>
+        <h1>Learn Skills That <em>Shape Your Future.</em></h1>
+        <p>Build powerful technology and communication skills through quality education and practical project-based learning.</p>
+        <div class="hero-btns">
+          <a href="./Courses.html" class="btn btn-gold">View Courses →</a>
+          <a href="./about-us.html" class="btn btn-outline" style="color:#fff; border-color:#fff;">Discover More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-slide">
+    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920&auto=format&fit=crop');"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag">LEARN • GROW • SUCCEED</div>
+        <h1>Education That Prepares You For <em>Tomorrow.</em></h1>
+        <p>Our curriculum is designed with industry experts to help you master in-demand skills and build a successful career.</p>
+        <div class="hero-btns">
+          <a href="./Admissions.html" class="btn btn-gold">Apply Today →</a>
+          <a href="./about-us.html" class="btn btn-outline" style="color:#fff; border-color:#fff;">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="hero-arrow prev" id="heroPrev"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+  <button class="hero-arrow next" id="heroNext"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<!-- ============ WELCOME SECTION ============ -->
+<section class="welcome">
+  <div class="container">
+    <span class="section-tag">WELCOME TO WEBCODE</span>
+    <h2 class="section-title">Learn Today. Lead Tomorrow.</h2>
+    <p class="section-desc">A professional learning environment focused on practical IT, digital and language skills.</p>
+
+    <div class="welcome-grid">
+      <div class="feature-box">
+        <div class="feature-item">
+          <div class="feature-num">01</div>
+          <div class="feature-title">Practical project-based learning</div>
+          <div class="feature-text">Hands-on experience with real-world projects.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-num">02</div>
+          <div class="feature-title">Modern IT & language programs</div>
+          <div class="feature-text">Industry-relevant courses designed for today's market.</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-num">03</div>
+          <div class="feature-title">Supportive instructors and student guidance</div>
+          <div class="feature-text">Learn from professionals who care about your success.</div>
+        </div>
+      </div>
+
+      <div class="welcome-content">
+        <span class="section-tag">WHO WE ARE</span>
+        <h3>Education that prepares <span>you for tomorrow.</span></h3>
+        <p>WebCode Institute of IT & Languages provides modern, practical and accessible learning for students who want to grow in technology and communication.</p>
+        <p>Our goal is to help students understand concepts, practice skills and build confidence through useful projects and activities.</p>
+        <a href="./about-us.html" class="link-arrow">Discover More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COURSES SECTION ============ -->
+<section class="courses">
+  <div class="container">
+    <span class="section-tag">OUR PROGRAMS</span>
+    <h2 class="section-title">Learn Skills That <br><span>Build Your Future</span></h2>
+    <p class="section-desc">Explore our professional IT and language programs designed to develop practical skills and confidence.</p>
+
+    <div class="course-grid">
+      
+      <!-- Card 1 -->
+      <div class="course-card">
+        <div class="course-num">01</div>
+        <div class="course-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
+        </div>
+        <span class="course-tag">IT PROGRAM</span>
+        <h3 class="course-title">Certificate in Information Technology</h3>
+        <p class="course-desc">Build essential computer and information technology skills through practical learning and hands-on training.</p>
+        <ul class="course-features">
+          <li>Professional Course</li>
+          <li>Certification Provided</li>
+        </ul>
+        <a href="./Courses.html" class="btn-apply">Apply Now →</a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="course-card">
+        <div class="course-num">02</div>
+        <div class="course-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+        </div>
+        <span class="course-tag">ADVANCED IT</span>
+        <h3 class="course-title">Diploma in Information Technology</h3>
+        <p class="course-desc">Develop advanced computer, programming, web development and office technology skills with practical projects.</p>
+        <ul class="course-features">
+          <li>Professional Diploma</li>
+          <li>Advanced Curriculum</li>
+        </ul>
+        <a href="./Courses.html" class="btn-apply">Apply Now →</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="course-card">
+        <div class="course-num">03</div>
+        <div class="course-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </div>
+        <span class="course-tag">OFFICE PROGRAM</span>
+        <h3 class="course-title">Office Automation Tools</h3>
+        <p class="course-desc">Learn Microsoft Word, Excel, PowerPoint and essential digital office skills for modern workplaces.</p>
+        <ul class="course-features">
+          <li>Skill Development</li>
+          <li>Practical Training</li>
+        </ul>
+        <a href="./Courses.html" class="btn-apply">Apply Now →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT SECTION ============ -->
+<section class="about">
+  <div class="container">
+    <div class="about-grid">
+      
+      <div class="about-img-wrapper">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" alt="Classroom" class="about-img">
+        <div class="about-badge">
+          <strong>10+</strong>
+          <small>Years of<br>Academic Growth</small>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <span class="section-tag">ABOUT WEBCODE INSTITUTE</span>
+        <h3>Empowering Students <br>With <span>Skills for Tomorrow</span></h3>
+        <p>WebCode Institute of IT & Languages is dedicated to providing practical education in information technology, digital skills, and languages.</p>
+        <p>Our learning environment focuses on practical knowledge, professional guidance and skills that students can use in their academic and career journey.</p>
+        
+        <div class="mini-cards">
+          <div class="mini-card">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <div>
+              <h4>Quality Education</h4>
+              <p>Accessible and engaging learning.</p>
+            </div>
+          </div>
+          <div class="mini-card">
+            <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+            <div>
+              <h4>Practical Skills</h4>
+              <p>Hands-on learning experiences.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="./about-us.html" class="btn btn-navy">Discover More →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS SECTION ============ -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>100+</h3>
+        <p>Students</p>
+      </div>
+      <div class="stat-item">
+        <h3>03+</h3>
+        <p>Professional Courses</p>
+      </div>
+      <div class="stat-item">
+        <h3>07+</h3>
+        <p>Expert Trainers</p>
+      </div>
+      <div class="stat-item">
+        <h3>95%</h3>
+        <p>Student Satisfaction</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE SECTION ============ -->
+<section class="why">
+  <div class="container">
+    <div class="why-grid">
+      
+      <div class="why-content">
+        <span class="section-tag">WHY CHOOSE WEBCODE</span>
+        <h3>More Than Just <span>Learning</span></h3>
+        <p>We focus on helping students gain practical knowledge, confidence and skills that can support their future.</p>
+
+        <div class="why-feature">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+          <div>
+            <h4>Expert Guidance</h4>
+            <p>Learn with guidance from experienced and supportive instructors.</p>
+          </div>
+        </div>
+
+        <div class="why-feature">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
+          <div>
+            <h4>Practical Learning</h4>
+            <p>Develop real skills through practical exercises and projects.</p>
+          </div>
+        </div>
+
+        <div class="why-feature">
+          <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+          <div>
+            <h4>Professional Courses</h4>
+            <p>Choose programs designed around useful technology and digital skills.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-graphic">
+        <div class="why-graphic-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          03+ Courses
+        </div>
+        <div class="why-graphic-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+        </div>
+        <h2>WEBCODE INSTITUTE</h2>
+        <h2>Build Your Skills.<br><span>Shape Your Future.</span></h2>
+        <p>Practice. Grow. Succeed.</p>
+
+        <div class="why-mini-badge">
+          <span>100+</span> Practice. Grow.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS SECTION ============ -->
+<section class="testimonials">
+  <div class="container">
+    <span class="section-tag">STUDENT REVIEWS</span>
+    <h2 class="section-title">What Our Students <br><span>Say About Us</span></h2>
+    <p class="section-desc">Hear from students who have experienced learning and skill development at WebCode Institute.</p>
+
+    <div class="testimonial-grid">
+      
+      <div class="testimonial-card">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>WebCode Institute provided me with a very good learning environment. The practical classes helped me improve my computer and IT skills.</p>
+        <div class="user-info">
+          <div class="user-avatar">MZ</div>
+          <div>
+            <h4>MUHAMMAD ZAKIR</h4>
+            <p>DIT Student</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card active">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>The instructors are supportive and explain concepts clearly. I learned useful skills that I can apply in my studies and future career.</p>
+        <div class="user-info">
+          <div class="user-avatar">NM</div>
+          <div>
+            <h4>NOOR MUSTAFA</h4>
+            <p>DIT Student</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="quote-icon">"</div>
+        <div class="stars">★★★★★</div>
+        <p>I really enjoyed the practical learning experience. The institute provides a friendly environment where students can learn and grow confidently.</p>
+        <div class="user-info">
+          <div class="user-avatar">MS</div>
+          <div>
+            <h4>MAIDA SHAH</h4>
+            <p>DIT Student</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY SECTION ============ -->
+<section class="gallery">
+  <div class="container">
+    <span class="section-tag">OUR CAMPUS</span>
+    <h2 class="section-title">Explore Our <br><span>Learning Environment</span></h2>
+    <p class="section-desc">Take a look at our classrooms, computer lab and learning activities at WebCode Institute.</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" alt="Lab">
+        <div class="gallery-overlay">
+          <span>Learning Space</span>
+          <h4>Modern Computer Lab</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" alt="Classroom">
+        <div class="gallery-overlay">
+          <span>Education</span>
+          <h4>Classroom</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Office">
+        <div class="gallery-overlay">
+          <span>Administration</span>
+          <h4>Office</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" alt="Training">
+        <div class="gallery-overlay">
+          <span>Practical</span>
+          <h4>IT Training</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop" alt="Students">
+        <div class="gallery-overlay">
+          <span>Student Life</span>
+          <h4>Our Students</h4>
+        </div>
+      </div>
+    </div>
+
+    <a href="./Gallery.html" class="btn btn-navy">View Full Gallery</a>
+  </div>
+</section>
+
+<!-- ============ CTA SECTION ============ -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <div class="cta-text">
+        <span class="tag">START YOUR JOURNEY</span>
+        <h2>Ready to Build Your <br><span>Future With Webcode?</span></h2>
+        <p>Join WebCode Institute and develop practical IT, digital and language skills for your future.</p>
+        <div class="cta-btns">
+          <a href="./Admissions.html" class="btn btn-gold">Apply for Admission →</a>
+          <a href="./Courses.html" class="btn btn-outline" style="color:#fff; border-color:#fff;">Explore Courses</a>
+        </div>
+      </div>
+      <div class="cta-circle">
+        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+        <h4>LEARN<br>GROW<br>SUCCEED</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      
+      <div class="footer-logo">
+        <a href="./index.html" class="logo-wrap">
+          <div class="logo-icon">
+            <span>WEB</span>
+            <span class="logo-main-text">CODE</span>
+            <span>INSTITUTE</span>
+          </div>
+          <div class="logo-text-group">
+            <div class="logo-title">WEBCODE</div>
+            <div class="logo-subtitle">Institute of IT &amp; Languages</div>
+          </div>
+        </a>
+        <p class="footer-desc">Empowering students with practical IT, digital and language skills for a better and brighter future.</p>
+        <div class="social-links">
+  <a href="https://www.facebook.com/profile.php?id=61578404112118" aria-label="Facebook" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+  </a>
+
+ <a
+  href="https://www.tiktok.com/@sain_07860"
+  aria-label="TikTok"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+    <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+  </svg>
+</a>
+
+  <a href="https://wa.me/92101391632" aria-label="WhatsApp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about-us.html">About Us</a></li>
+          <li><a href="./Courses.html">Courses</a></li>
+          <li><a href="./Admissions.html">Admissions</a></li>
+          <li><a href="./Faculty.html">Faculty</a></li>
+          <li><a href="./Gallery.html">Gallery</a></li>
+          <li><a href="./Contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Our Courses</h4>
+        <ul class="footer-links">
+          <li><a href="./Courses.html">CIT</a></li>
+          <li><a href="./Courses.html">DIT</a></li>
+          <li><a href="./Courses.html">OAT</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span>Near Eid Gah Opposite lucky Ultrasound Sindh Bank Pir Jo Goth</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+92 3101391632</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            <span>Webcodeinstitute2025@gmail.com</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div>© 2025 WebCode Institute. All Rights Reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+  mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Hero Slider
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDots   = document.getElementById('heroDots');
+  let heroIndex    = 0;
+  let heroTimer;
+
+  heroSlides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    if (i === 0) b.classList.add('active');
+    b.addEventListener('click', () => goToHero(i));
+    heroDots.appendChild(b);
+  });
+  const heroDotEls = heroDots.querySelectorAll('button');
+
+  function goToHero(index) {
+    heroSlides[heroIndex].classList.remove('active');
+    heroDotEls[heroIndex].classList.remove('active');
+    heroIndex = (index + heroSlides.length) % heroSlides.length;
+    heroSlides[heroIndex].classList.add('active');
+    heroDotEls[heroIndex].classList.add('active');
+    restartHeroTimer();
+  }
+
+  function restartHeroTimer() {
+    clearInterval(heroTimer);
+    heroTimer = setInterval(() => goToHero(heroIndex + 1), 6000);
+  }
+
+  document.getElementById('heroNext').addEventListener('click', () => goToHero(heroIndex + 1));
+  document.getElementById('heroPrev').addEventListener('click', () => goToHero(heroIndex - 1));
+
+  const heroEl = document.querySelector('.hero');
+  heroEl.addEventListener('mouseenter', () => clearInterval(heroTimer));
+  heroEl.addEventListener('mouseleave', restartHeroTimer);
+
+  restartHeroTimer();
+</script>
+</body>
+</html>

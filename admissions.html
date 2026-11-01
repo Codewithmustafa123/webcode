@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admissions - WEBCODE Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & VARIABLES ============ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy-dark: #081431;
+  --hero-blue: #0c2054;
+  --heading-blue: #0f2557;
+  --gold: #f5b301;
+  --gold-hover: #e0a200;
+  --text-dark: #1e293b;
+  --text-gray: #64748b;
+  --text-light: #cbd5e1;
+  --bg-white: #ffffff;
+  --bg-light: #f4f7f9;
+  --border-color: #e2e8f0;
+  --font-main: 'Poppins', sans-serif;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  line-height: 1.6;
+  background-color: var(--bg-white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============ TOP BAR ============ */
+.topbar {
+  background-color: var(--navy-dark);
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 10px 0;
+}
+
+.topbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar-left {
+  display: flex;
+  gap: 24px;
+}
+
+.topbar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s;
+}
+
+.topbar-item:hover {
+  color: var(--gold);
+}
+
+.topbar-item svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--gold);
+}
+
+/* ============ NAVBAR ============ */
+.navbar {
+  background-color: var(--bg-white);
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Recreation */
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 54px;
+  height: 54px;
+  background-color: var(--bg-white);
+  border: 2px solid var(--navy-dark);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo-icon::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border: 1px solid var(--navy-dark);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.logo-icon span {
+  font-size: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--navy-dark);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.logo-icon .logo-main-text {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy-dark);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.logo-subtitle {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-gray);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy-dark);
+  transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-main);
+  background-color: var(--gold);
+  color: var(--navy-dark);
+}
+.btn-header:hover {
+  background-color: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--navy-dark);
+  border-radius: 2px;
+}
+
+/* ============ HERO SECTION ============ */
+.hero {
+  background-color: var(--hero-blue);
+  padding: 90px 0 110px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Abstract Background Shapes */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--bg-white);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.hero p {
+  font-size: 18px;
+  color: var(--text-light);
+  max-width: 650px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ============ ADMISSION FORM SECTION ============ */
+.admission-section {
+  background-color: var(--bg-light);
+  padding: 80px 0 100px;
+  min-height: 800px;
+}
+
+.form-card {
+  max-width: 960px;
+  margin: 0 auto;
+  background-color: var(--bg-white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+/* Form Header */
+.form-header {
+  background-color: var(--hero-blue);
+  padding: 36px 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.form-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold) 0%, rgba(245,179,1,0.3) 100%);
+}
+
+.form-header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-header-left .section-tag {
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.form-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--bg-white);
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.form-header p {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.institute-badge {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--bg-white);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.institute-badge svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--gold);
+}
+
+/* Form Body */
+.form-body {
+  padding: 44px;
+}
+
+.form-section {
+  margin-bottom: 36px;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-icon-box {
+  width: 42px;
+  height: 42px;
+  background-color: #fdf5e6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-icon-box svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.form-section-title h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--heading-blue);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.form-section-title p {
+  font-size: 12px;
+  color: var(--text-gray);
+  font-weight: 400;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--heading-blue);
+}
+
+.form-group label span {
+  color: #ef4444;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper svg {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  stroke: #94a3b8;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+  width: 100%;
+  padding: 13px 16px 13px 46px;
+  font-size: 14px;
+  font-family: var(--font-main);
+  color: var(--text-dark);
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-wrapper textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.input-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus,
+.input-wrapper textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(245, 179, 1, 0.15);
+}
+
+.input-wrapper input::placeholder,
+.input-wrapper textarea::placeholder {
+  color: #94a3b8;
+  font-weight: 300;
+}
+
+/* Gender Radio Custom */
+.gender-options {
+  display: flex;
+  gap: 12px;
+  height: 100%;
+}
+
+.gender-option {
+  flex: 1;
+  position: relative;
+}
+
+.gender-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.gender-option label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 13px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray);
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.gender-option label svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gender-option input[type="radio"]:checked + label {
+  border-color: var(--gold);
+  color: var(--heading-blue);
+  background-color: #fdfaf0;
+  box-shadow: 0 0 0 3px rgba(245, 179, 1, 0.15);
+}
+
+.gender-option input[type="radio"]:checked + label svg {
+  stroke: var(--gold);
+}
+
+/* Upload Area */
+.upload-area {
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: #fafbfc;
+  transition: border-color 0.3s;
+}
+
+.upload-area:hover {
+  border-color: var(--gold);
+}
+
+.upload-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.upload-icon-box {
+  width: 54px;
+  height: 54px;
+  background-color: #fdf5e6;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.upload-icon-box svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.upload-text h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--heading-blue);
+  margin-bottom: 2px;
+}
+
+.upload-text p {
+  font-size: 12px;
+  color: var(--text-gray);
+}
+
+.btn-choose {
+  background-color: var(--hero-blue);
+  color: var(--bg-white);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: var(--font-main);
+}
+
+.btn-choose:hover {
+  background-color: var(--navy-dark);
+}
+
+/* Form Footer */
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 10px;
+}
+
+.secure-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-gray);
+}
+
+.secure-text svg {
+  width: 16px;
+  height: 16px;
+  fill: #64748b;
+}
+
+.btn-submit {
+  background-color: var(--gold);
+  color: var(--navy-dark);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  font-family: var(--font-main);
+}
+
+.btn-submit:hover {
+  background-color: var(--gold-hover);
+  transform: translateY(-2px);
+}
+
+.btn-submit svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  background-color: var(--navy-dark);
+  color: #94a3b8;
+  padding-top: 80px;
+  border-top: 4px solid var(--gold);
+  position: relative;
+}
+
+/* Decorative circle background */
+.footer::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  padding-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* FOOTER LOGO FIX: Forcing exact same colors as Navbar */
+.footer-logo .logo-icon {
+  background-color: var(--bg-white) !important;
+  border-color: var(--navy-dark) !important;
+}
+.footer-logo .logo-icon::before {
+  border-color: var(--navy-dark) !important;
+}
+.footer-logo .logo-icon span {
+  color: var(--navy-dark) !important;
+}
+.footer-logo .logo-title {
+  color: var(--bg-white);
+  font-size: 20px;
+}
+.footer-logo .logo-subtitle {
+  color: #94a3b8;
+}
+
+.footer-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 24px 0;
+  max-width: 300px;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.social-links a {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+  background-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.social-links svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--bg-white);
+  transition: fill 0.3s;
+}
+
+.social-links a:hover svg {
+  fill: var(--navy-dark);
+}
+
+.footer-col h4 {
+  color: var(--bg-white);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--gold);
+}
+
+.footer-links li {
+  margin-bottom: 14px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+  transform: translateX(5px);
+}
+
+.footer-links a::before {
+  content: '›';
+  color: var(--gold);
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.footer-contact li {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contact-icon {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.footer-contact svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--gold);
+}
+
+.footer-contact span {
+  display: block;
+  margin-top: 4px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-bottom .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-bottom-links a {
+  transition: color 0.3s;
+}
+
+.footer-bottom-links a:hover {
+  color: var(--gold);
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 52px;
+  }
+  .form-card {
+    max-width: 100%;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar .container {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  .topbar-left {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nav-links,
+  .nav-actions {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-white);
+    padding: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-color);
+  }
+  .nav-links.active a {
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .hero {
+    padding: 70px 0 90px;
+  }
+  .hero h1 {
+    font-size: 38px;
+  }
+  .hero p {
+    font-size: 16px;
+  }
+  .form-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 30px;
+  }
+  .form-header h2 {
+    font-size: 26px;
+  }
+  .form-body {
+    padding: 30px 24px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .upload-area {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+  .btn-choose {
+    width: 100%;
+  }
+  .form-footer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom .container {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="tel:+923079183200" class="topbar-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>+92 3101391632</span>
+      </a>
+      <a href="mailto:Webcodeinstitute2025@gmail.com" class="topbar-item">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+        <span>Webcodeinstitute2025@gmail.com</span>
+      </a>
+    </div>
+    <div class="topbar-right">
+      <span>Professional IT &amp; Language Education</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar">
+  <div class="container">
+    <a href="./index.html" class="logo-wrap">
+      <div class="logo-icon">
+        <span>WEB</span>
+        <span class="logo-main-text">CODE</span>
+        <span>INSTITUTE</span>
+      </div>
+      <div class="logo-text-group">
+        <div class="logo-title">WEBCODE</div>
+        <div class="logo-subtitle">Institute of IT &amp; Languages</div>
+      </div>
+    </a>
+
+   <ul class="nav-links" id="navLinks">
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="./about-us.html">About Us</a></li>
+      <li><a href="./Courses.html">Courses</a></li>
+      <li><a href="./Admissions.html" class="active">Admissions</a></li>
+      <li><a href="./Faculty.html">Faculty</a></li>
+      <li><a href="./Gallery.html">Gallery</a></li>
+      <li><a href="./Contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="./Admissions.html" class="btn-header">Apply Now</a>
+      <a href="./admin.html" class="btn-header">Admin Login</a>
+    </div>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO SECTION ============ -->
+<section class="hero">
+  <div class="container">
+    <span class="section-tag">Admissions Open</span>
+    <h1>Begin Your<br><span>Learning Journey</span></h1>
+    <p>Complete the admission form below to join WebCode Institute of IT &amp; Languages.</p>
+  </div>
+</section>
+
+<!-- ============ ADMISSION FORM SECTION ============ -->
+<section class="admission-section">
+  <div class="container">
+    <div class="form-card">
+      
+      <!-- Form Header -->
+      <div class="form-header">
+        <div class="form-header-left">
+          <span class="section-tag">Student Admission</span>
+          <h2>Admission Form</h2>
+          <p>Please enter the student's information carefully.</p>
+        </div>
+        <div class="institute-badge">
+          <svg viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+          <span>WebCode Institute</span>
+        </div>
+      </div>
+
+      <!-- Form Body -->
+      <form class="form-body" onsubmit="event.preventDefault();">
+        
+        <!-- Section 1: Personal Information -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="section-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Personal Information</h3>
+              <p>Student's basic information</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            
+            <!-- Student Name -->
+            <div class="form-group">
+              <label>Student Name <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" placeholder="Enter student name" required>
+              </div>
+            </div>
+
+            <!-- Father Name -->
+            <div class="form-group">
+              <label>Father Name <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" placeholder="Enter father name" required>
+              </div>
+            </div>
+
+            <!-- Caste -->
+            <div class="form-group">
+              <label>Caste <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <input type="text" placeholder="Enter caste" required>
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+              <label>Gender <span>*</span></label>
+              <div class="gender-options">
+                <div class="gender-option">
+                  <input type="radio" id="male" name="gender" value="male" checked>
+                  <label for="male">
+                    <svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M21 21l-6-6M21 3v6h-6"/></svg>
+                    Male
+                  </label>
+                </div>
+                <div class="gender-option">
+                  <input type="radio" id="female" name="gender" value="female">
+                  <label for="female">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="7"/><path d="M12 17v5M9 20h6"/></svg>
+                    Female
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+              <label>Phone Number <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <input type="tel" placeholder="+92 300 1234567" required>
+              </div>
+            </div>
+
+            <!-- CNIC / B-Form -->
+            <div class="form-group">
+              <label>CNIC / B-Form <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+                <input type="text" placeholder="XXXXX-XXXXXXX-X" required>
+              </div>
+            </div>
+
+            <!-- Guardian Profession -->
+            <div class="form-group">
+              <label>Guardian Profession <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                <input type="text" placeholder="Enter guardian profession" required>
+              </div>
+            </div>
+
+            <!-- Previous Qualification -->
+            <div class="form-group">
+              <label>Previous Qualification <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                <input type="text" placeholder="e.g. Matric, Intermediate" required>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Section 2: Course Information -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="section-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Course Information</h3>
+              <p>Select the course you want to study</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Select Course <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+                <select required>
+                  <option value="" disabled selected>Select your course</option>
+                  <option value="dit">Diploma in Information Technology (DIT)</option>
+                  <option value="cit">Certificate in Information Technology (CIT)</option>
+                  <option value="oat">Office Automation Technology (OAT)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Contact Information -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <div class="section-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Contact Information</h3>
+              <p>Student's current address</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Address <span>*</span></label>
+              <div class="input-wrapper">
+                <svg viewBox="0 0 24 24" style="top: 20px; transform: none;"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <textarea placeholder="Enter complete address" required></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Student Photo -->
+        <div class="form-section" style="margin-bottom: 0;">
+          <div class="form-section-header" style="border-bottom: none; margin-bottom: 16px; padding-bottom: 0;">
+            <div class="section-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <div class="form-section-title">
+              <h3>Student Photo</h3>
+              <p>Upload a recent passport-size photo</p>
+            </div>
+          </div>
+
+          <div class="upload-area">
+            <div class="upload-info">
+              <div class="upload-icon-box">
+                <svg viewBox="0 0 24 24"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+              </div>
+              <div class="upload-text">
+                <h4>Upload Student Photo</h4>
+                <p>JPG, JPEG or PNG - Maximum 2MB</p>
+              </div>
+            </div>
+            <button type="button" class="btn-choose">Choose Photo</button>
+          </div>
+        </div>
+
+        <!-- Form Footer -->
+        <div class="form-footer">
+          <div class="secure-text">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Your information will be kept secure.</span>
+          </div>
+          <button type="submit" class="btn-submit">
+            Submit Admission
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      
+      <!-- Column 1: Logo & Desc -->
+      <div class="footer-logo">
+        <a href="./index.html" class="logo-wrap">
+          <div class="logo-icon">
+            <span>WEB</span>
+            <span class="logo-main-text">CODE</span>
+            <span>INSTITUTE</span>
+          </div>
+          <div class="logo-text-group">
+            <div class="logo-title">WEBCODE</div>
+            <div class="logo-subtitle">Institute of IT &amp; Languages</div>
+          </div>
+        </a>
+        <p class="footer-desc">Empowering students with practical IT, digital and language skills for a better and brighter future.</p>
+        <div class="social-links">
+  <a href="https://www.facebook.com/profile.php?id=61578404112118" aria-label="Facebook" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+  </a>
+
+   <a
+  href="https://www.tiktok.com/@sain_07860"
+  aria-label="TikTok"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+    <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+  </svg>
+</a>
+
+  <a href="https://wa.me/92101391632" aria-label="WhatsApp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./about-us.html">About Us</a></li>
+          <li><a href="./Courses.html">Courses</a></li>
+          <li><a href="./Admissions.html">Admissions</a></li>
+          <li><a href="./Faculty.html">Faculty</a></li>
+          <li><a href="./Gallery.html">Gallery</a></li>
+          <li><a href="./Contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Our Courses -->
+      <div class="footer-col">
+        <h4>Our Courses</h4>
+        <ul class="footer-links">
+          <li><a href="./Courses.html">CIT</a></li>
+          <li><a href="./Courses.html">DIT</a></li>
+          <li><a href="./Courses.html">OAT</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Contact Us -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul class="footer-contact">
+          <li>
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <span>Near Eid Gah Opposite lucky Ultrasound Sindh Bank Pir Jo Goth</span>
+          </li>
+          <li>
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span>+92 3101391632</span>
+          </li>
+          <li>
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </div>
+            <span>Webcodeinstitute2025@gmail.com</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div>© 2026 <strong>WebCode Institute</strong>. All Rights Reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+
+  mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+</body>
+</html>
