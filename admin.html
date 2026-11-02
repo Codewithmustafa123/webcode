@@ -7,6 +7,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  /* Theme load before paint (prevents flash) */
+  (function () {
+    try {
+      var t = localStorage.getItem('webcode-theme');
+      if (t === 'dark' || t === 'light') {
+        document.documentElement.setAttribute('data-theme', t);
+      } else {
+        // Default to dark for admin page
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) {}
+  })();
+</script>
 <style>
 /* ============ RESET & VARIABLES ============ */
 *,
@@ -27,27 +41,48 @@
   --bg-white: #ffffff;
   --border-color: #e2e8f0;
   --font-main: 'Poppins', sans-serif;
+  
+  /* Theme specific variables (Light Mode Default) */
+  --body-bg: #f4f7f9;
+  --card-bg: #ffffff;
+  --text-main: #102a71;
+  --text-muted: #64748b;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-text: #1e293b;
+  --right-panel-overlay: rgba(8, 20, 49, 0.15);
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --body-bg: #081431;
+  --card-bg: #0b1322;
+  --text-main: #e8eef9;
+  --text-muted: #9db0cb;
+  --input-bg: #060b16;
+  --input-border: #1c2740;
+  --input-text: #e8eef9;
+  --right-panel-overlay: rgba(8, 20, 49, 0.6);
 }
 
 body {
   font-family: var(--font-main);
-  background-color: var(--navy-dark);
+  background-color: var(--body-bg);
   color: var(--text-dark);
   min-height: 100vh;
   display: flex;
   margin: 0;
   overflow-x: hidden;
   position: relative;
+  transition: background-color 0.35s ease;
 }
 
 /* Background Decorative Shapes */
 body::before {
   content: '';
   position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 600px;
-  height: 600px;
+  top: -10%; left: -10%;
+  width: 600px; height: 600px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.03);
   pointer-events: none;
@@ -57,15 +92,42 @@ body::before {
 body::after {
   content: '';
   position: absolute;
-  bottom: -20%;
-  left: 10%;
-  width: 800px;
-  height: 800px;
+  bottom: -20%; left: 10%;
+  width: 800px; height: 800px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.03);
   pointer-events: none;
   z-index: 0;
 }
+
+/* ============ THEME TOGGLE BUTTON ============ */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--input-border);
+  background: var(--card-bg);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all .3s ease;
+  z-index: 10;
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  border-color: var(--gold);
+  background: rgba(245,179,1,.12);
+  transform: rotate(20deg);
+}
+.theme-toggle svg {
+  position: absolute;
+  width: 18px; height: 18px;
+  transition: opacity .35s ease, transform .45s ease;
+}
+.theme-toggle .icon-sun { fill: var(--gold); opacity: 1; transform: rotate(0deg) scale(1); }
+.theme-toggle .icon-moon { fill: var(--gold); opacity: 0; transform: rotate(-90deg) scale(.5); }
+[data-theme="dark"] .theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg) scale(.5); }
+[data-theme="dark"] .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
 
 /* ============ LEFT PANEL (LOGIN FORM) ============ */
 .left-panel {
@@ -79,14 +141,19 @@ body::after {
 }
 
 .login-card {
-  background-color: var(--bg-white);
+  background-color: var(--card-bg);
   width: 100%;
   max-width: 440px;
   padding: 65px 45px 40px;
   border-radius: 24px;
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: center;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+[data-theme="dark"] .login-card {
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
 }
 
 /* Floating Logo */
@@ -95,36 +162,32 @@ body::after {
   top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 100px;
-  background-color: var(--bg-white);
+  width: 100px; height: 100px;
+  background-color: var(--card-bg);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  border: 5px solid var(--bg-white);
+  border: 5px solid var(--card-bg);
   overflow: hidden;
-  transition: all 0.4s ease; /* Smooth transition for hover effect */
+  transition: all 0.4s ease;
   cursor: pointer;
 }
 
-/* Logo Image */
 .custom-logo-img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease; /* Smooth zoom for image */
+  transition: transform 0.4s ease;
 }
 
-/* HOVER EFFECT ON LOGO */
 .logo-wrapper:hover {
-  border-color: var(--gold); /* Border turns Gold */
-  box-shadow: 0 15px 35px rgba(245, 179, 1, 0.3); /* Golden shadow glow */
+  border-color: var(--gold);
+  box-shadow: 0 15px 35px rgba(245, 179, 1, 0.3);
 }
 
 .logo-wrapper:hover .custom-logo-img {
-  transform: scale(1.15); /* Image zooms in slightly */
+  transform: scale(1.15);
 }
 
 /* Typography */
@@ -141,16 +204,18 @@ body::after {
 .login-card h1 {
   font-size: 32px;
   font-weight: 700;
-  color: var(--button-blue);
+  color: var(--text-main);
   margin-bottom: 10px;
   letter-spacing: -0.5px;
+  transition: color 0.35s ease;
 }
 
 .login-card p.subtitle {
   font-size: 14px;
-  color: var(--text-gray);
+  color: var(--text-muted);
   margin-bottom: 35px;
   line-height: 1.6;
+  transition: color 0.35s ease;
 }
 
 /* Form Inputs */
@@ -163,8 +228,9 @@ body::after {
   display: block;
   font-size: 13.5px;
   font-weight: 600;
-  color: var(--button-blue);
+  color: var(--text-main);
   margin-bottom: 8px;
+  transition: color 0.35s ease;
 }
 
 .form-group input {
@@ -172,29 +238,30 @@ body::after {
   padding: 15px 18px;
   font-size: 14.5px;
   font-family: var(--font-main);
-  color: var(--text-dark);
-  border: 1px solid #d1d5db;
+  color: var(--input-text);
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   outline: none;
   transition: all 0.3s ease;
 }
 
 .form-group input::placeholder {
-  color: #9ca3af;
-  font-weight: 400;
+  color: var(--text-muted);
+  opacity: 0.7;
 }
 
 .form-group input:focus {
-  border-color: var(--button-blue);
-  box-shadow: 0 0 0 4px rgba(15, 37, 87, 0.1);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(245, 179, 1, 0.15);
 }
 
 /* Button */
 .btn-login {
   width: 100%;
   padding: 16px;
-  background-color: var(--button-blue);
-  color: var(--bg-white);
+  background-color: var(--gold);
+  color: #081431;
   font-size: 15px;
   font-weight: 600;
   font-family: var(--font-main);
@@ -204,11 +271,11 @@ body::after {
   transition: background-color 0.3s, transform 0.2s;
   margin-top: 10px;
   margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(15, 37, 87, 0.2);
+  box-shadow: 0 4px 12px rgba(245, 179, 1, 0.2);
 }
 
 .btn-login:hover {
-  background-color: var(--navy-dark);
+  background-color: #e0a200;
   transform: translateY(-2px);
 }
 
@@ -220,7 +287,7 @@ body::after {
   gap: 6px;
   font-size: 14.5px;
   font-weight: 600;
-  color: var(--button-blue);
+  color: var(--text-main);
   text-decoration: none;
   transition: color 0.3s;
   margin-bottom: 35px;
@@ -233,8 +300,9 @@ body::after {
 /* Footer Copyright */
 .copyright {
   font-size: 12px;
-  color: #9ca3af;
+  color: var(--text-muted);
   margin: 0;
+  transition: color 0.35s ease;
 }
 
 /* ============ RIGHT PANEL (IMAGE) ============ */
@@ -252,11 +320,9 @@ body::after {
 .right-panel::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('./cnter.jpg');
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('./cnter.jpg'); /* Apni image ka naam yahan check karein */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -268,7 +334,7 @@ body::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(8, 20, 49, 0.15);
+  background: var(--right-panel-overlay);
   transition: background 0.6s ease;
   z-index: 2;
   pointer-events: none;
@@ -307,6 +373,11 @@ body::after {
   .right-panel {
     display: none;
   }
+  
+  .theme-toggle {
+    right: 20px;
+    top: 15px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -332,6 +403,16 @@ body::after {
 </head>
 <body>
 
+  <!-- THEME TOGGLE BUTTON -->
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.5 4.93l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zm13.46 13.46l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zM1 11h3v2H1v-2zm19 0h3v2h-3v-2zM4.93 19.5l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13zM18.38 6.04l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13z"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
   <!-- LEFT PANEL: LOGIN FORM -->
   <div class="left-panel">
     <div class="login-card">
@@ -347,7 +428,7 @@ body::after {
       <p class="subtitle">Login to manage WebCode Institute admissions.</p>
 
       <!-- Form -->
-      <form onsubmit="event.preventDefault(); alert('Login Attempted');">
+      <form id="loginForm">
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" placeholder="Enter admin username" required autocomplete="username">
@@ -374,5 +455,57 @@ body::after {
   <!-- RIGHT PANEL: BACKGROUND IMAGE -->
   <div class="right-panel"></div>
 
+<script>
+  /* ============================================================
+     THEME TOGGLE (Dark / Light)
+     ============================================================ */
+  (function () {
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      toggle.setAttribute('aria-label',
+        theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      try { localStorage.setItem('webcode-theme', theme); } catch (e) {}
+    }
+
+    toggle.addEventListener('click', function () {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  })();
+
+  /* ============================================================
+     LOGIN SYSTEM LOGIC
+     ============================================================ */
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Form submit hone se roke
+
+    // Yahan Username aur Password set hain
+    const ADMIN_USERNAME = "admin";
+    const ADMIN_PASSWORD = "webcode123";
+
+    // Input fields ki values uthayein
+    const inputUser = document.getElementById('username').value.trim();
+    const inputPass = document.getElementById('password').value.trim();
+
+    // Check karein
+    if (inputUser === ADMIN_USERNAME && inputPass === ADMIN_PASSWORD) {
+      // Agar sahi hai to Dashboard (index.html) par bhej dein
+      alert("✅ Login Successful! Welcome to Admin Panel.");
+      
+      // Session save karein taake pata chale ke login ho chuka hai
+      sessionStorage.setItem('webcode_admin_logged_in', 'true');
+      
+      // Redirect to main website or admin dashboard
+      window.location.href = "index.html"; 
+    } else {
+     
+      alert("❌ Invalid Username or Password. Please try again.");
+      document.getElementById('password').value = ''; 
+    }
+  });
+</script>
 </body>
 </html>

@@ -8,6 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  /* Apply saved theme before paint (prevents flash) */
+  (function () {
+    try {
+      var t = localStorage.getItem('webcode-theme');
+      if (t === 'dark' || t === 'light') {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+    } catch (e) {}
+  })();
+</script>
 <style>
 /* ============================================================
    RESET & VARIABLES
@@ -98,6 +109,9 @@ section{padding:90px 0;position:relative}
 .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-dark); transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); font-weight: 600; }
 
+/* Nav Right Cluster */
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
 /* Nav Actions */
 .nav-actions { display: flex; gap: 10px; align-items: center; }
 .btn-header {
@@ -106,7 +120,32 @@ section{padding:90px 0;position:relative}
 }
 .btn-header:hover { background-color: var(--gold-hover); transform: translateY(-2px); }
 
-.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle {
+  position: relative;
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-light);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background-color .3s ease, border-color .3s ease, transform .3s ease;
+}
+.theme-toggle:hover {
+  border-color: var(--gold);
+  background: rgba(245,179,1,.12);
+  transform: rotate(20deg);
+}
+.theme-toggle svg {
+  position: absolute;
+  width: 18px; height: 18px;
+  transition: opacity .35s ease, transform .45s ease;
+}
+.theme-toggle .icon-sun { fill: var(--gold); opacity: 1; transform: rotate(0deg) scale(1); }
+.theme-toggle .icon-moon { fill: var(--gold); opacity: 0; transform: rotate(-90deg) scale(.5); }
+[data-theme="dark"] .theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg) scale(.5); }
+[data-theme="dark"] .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
+
+.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
 .mobile-menu-btn span { display: block; width: 24px; height: 2px; background-color: var(--text-dark); border-radius: 2px; }
 
 /* ============================================================
@@ -346,6 +385,69 @@ section{padding:90px 0;position:relative}
 .footer-bottom-links a:hover { color: var(--gold); }
 
 /* ============================================================
+   DARK THEME
+   ============================================================ */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --navy-dark: #0e1a33;
+  --heading-blue: #16264a;
+  --gold: #f5b301;
+  --gold-hover: #ffc61a;
+  --text-dark: #e8eef9;
+  --text-gray: #9db0cb;
+  --bg-white: #060b16;
+  --bg-light: #0b1322;
+  --border-color: #1c2740;
+}
+
+/* Smooth colour cross-fade between themes */
+body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial-card {
+  transition: background-color .35s ease, border-color .35s ease, color .35s ease;
+}
+
+/* Headings that were forced to the navy colour */
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .welcome-content h3,
+[data-theme="dark"] .about-content h3,
+[data-theme="dark"] .stat-item h3,
+[data-theme="dark"] .mini-card h4,
+[data-theme="dark"] .course-title {
+  color: var(--text-dark);
+}
+
+/* Big watermark numbers on course cards */
+[data-theme="dark"] .course-num { color: #16213a; }
+[data-theme="dark"] .course-card:hover .course-num { color: rgba(255,255,255,0.08); }
+
+/* Quote glyph on testimonials */
+[data-theme="dark"] .quote-icon { color: #1e2b45; }
+
+/* Badge ring matches the page background */
+[data-theme="dark"] .about-badge { border-color: var(--bg-white); }
+
+/* Navbar / panel depth */
+[data-theme="dark"] .navbar { box-shadow: 0 4px 24px rgba(0,0,0,.55); }
+[data-theme="dark"] .course-card { box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+[data-theme="dark"] .testimonial-card { box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+[data-theme="dark"] .feature-box { box-shadow: 0 20px 40px rgba(0,0,0,.45); }
+[data-theme="dark"] .cta-box { border: 1px solid var(--border-color); }
+[data-theme="dark"] .mini-card { border: 1px solid var(--border-color); }
+
+/* Outline buttons need a lighter hover surface in dark mode */
+[data-theme="dark"] .btn-outline:hover {
+  background: #1b2c4d;
+  border-color: var(--gold);
+}
+
+/* Solid navy button needs a touch more separation */
+[data-theme="dark"] .btn-navy {
+  background: var(--heading-blue);
+  box-shadow: inset 0 0 0 1px var(--border-color);
+}
+[data-theme="dark"] .btn-navy:hover { background: #1d3566; }
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1024px) {
@@ -400,6 +502,7 @@ section{padding:90px 0;position:relative}
   }
   .nav-links.active a { padding: 12px 0; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
   .nav-links.active a:last-child { border-bottom: none; }
+  [data-theme="dark"] .nav-links.active a { border-bottom-color: var(--border-color); }
 
   /* Hero — height bug fix */
   .hero { height: auto; min-height: 500px; max-height: none; padding: 0; }
@@ -496,6 +599,8 @@ section{padding:90px 0;position:relative}
   .about-badge { padding: 12px 14px; }
   .about-badge strong { font-size: 18px; }
   .footer-col h4 { font-size: 15px; }
+  .theme-toggle { width: 36px; height: 36px; }
+  .theme-toggle svg { width: 16px; height: 16px; }
 }
 </style>
 </head>
@@ -545,12 +650,24 @@ section{padding:90px 0;position:relative}
       <li><a href="./Contact.html">Contact</a></li>
     </ul>
 
-    <div class="nav-actions">
-      <a href="./Admissions.html" class="btn-header">Apply Now</a>
-      <a href="./admin.html" class="btn-header">Admin Login</a>
-    </div>
+    <div class="nav-right">
+      <div class="nav-actions">
+        <a href="./Admissions.html" class="btn-header">Apply Now</a>
+        <a href="./admin.html" class="btn-header">Admin Login</a>
+      </div>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+      <!-- THEME TOGGLE -->
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.5 4.93l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zm13.46 13.46l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zM1 11h3v2H1v-2zm19 0h3v2h-3v-2zM4.93 19.5l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13zM18.38 6.04l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13z"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </nav>
 
@@ -586,8 +703,8 @@ section{padding:90px 0;position:relative}
     </div>
   </div>
 
-  <button class="hero-arrow prev" id="heroPrev"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
-  <button class="hero-arrow next" id="heroNext"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <button class="hero-arrow prev" id="heroPrev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+  <button class="hero-arrow next" id="heroNext" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
@@ -1029,14 +1146,43 @@ section{padding:90px 0;position:relative}
 </footer>
 
 <script>
-  // Mobile Menu Toggle
+  /* ============================================================
+     THEME TOGGLE (Dark / Light)
+     ============================================================ */
+  (function () {
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+
+    function applyTheme(theme) {
+      root.setAttribute('data-theme', theme);
+      toggle.setAttribute('aria-label',
+        theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      toggle.setAttribute('title',
+        theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      try { localStorage.setItem('webcode-theme', theme); } catch (e) {}
+    }
+
+    /* Sync button state with the theme applied in <head> */
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+
+    toggle.addEventListener('click', function () {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  })();
+
+  /* ============================================================
+     MOBILE MENU
+     ============================================================ */
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const navLinks = document.getElementById('navLinks');
   mobileMenuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
 
-  // Hero Slider
+  /* ============================================================
+     HERO SLIDER
+     ============================================================ */
   const heroSlides = document.querySelectorAll('.hero-slide');
   const heroDots   = document.getElementById('heroDots');
   let heroIndex    = 0;
@@ -1044,6 +1190,7 @@ section{padding:90px 0;position:relative}
 
   heroSlides.forEach((_, i) => {
     const b = document.createElement('button');
+    b.setAttribute('type', 'button');
     b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
     if (i === 0) b.classList.add('active');
     b.addEventListener('click', () => goToHero(i));
