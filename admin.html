@@ -4,6 +4,40 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Login - WEBCODE Institute</title>
+
+<link rel="icon" type="image/jpeg" href="./webcode%20logo.jpg">
+<link rel="shortcut icon" href="./webcode%20logo.jpg">
+<link rel="apple-touch-icon" href="./webcode%20logo.jpg">
+
+<script>
+(function () {
+  var img = new Image();
+  img.onload = function () {
+    try {
+      var s = 64;
+      var c = document.createElement('canvas');
+      c.width = s;
+      c.height = s;
+      var x = c.getContext('2d');
+      x.save();
+      x.beginPath();
+      x.arc(s / 2, s / 2, s / 2, 0, Math.PI * 2);
+      x.closePath();
+      x.clip();
+      var k = Math.max(s / img.width, s / img.height);
+      var w = img.width * k;
+      var h = img.height * k;
+      x.drawImage(img, (s - w) / 2, (s - h) / 2, w, h);
+      x.restore();
+      var url = c.toDataURL('image/png');
+      var links = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]');
+      for (var i = 0; i < links.length; i++) links[i].href = url;
+    } catch (e) {}
+  };
+  img.src = './webcode%20logo.jpg';
+})();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -291,7 +325,7 @@ body::after {
 }
 
 .back-link {
-  display: inline-flex;
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 6px;
@@ -301,6 +335,10 @@ body::after {
   text-decoration: none;
   transition: color 0.3s;
   margin-top: 10px;
+}
+
+.back-link.show {
+  display: inline-flex;
 }
 
 .back-link:hover {
@@ -407,7 +445,7 @@ body::after {
         <button type="submit" class="btn-login" style="margin-bottom: 10px;">Create Account</button>
       </form>
 
-      <a href="./index.html" class="back-link">&larr; Back to Website</a>
+      <a href="./index.html" class="back-link" id="backLink">&larr; Back to Website</a>
     </div>
   </div>
 
@@ -427,6 +465,13 @@ body::after {
       const isDark = root.getAttribute('data-theme') === 'dark';
       applyTheme(isDark ? 'light' : 'dark');
     });
+  })();
+
+  (function () {
+    const backLink = document.getElementById('backLink');
+    if (sessionStorage.getItem('webcode_logged_in_user')) {
+      backLink.classList.add('show');
+    }
   })();
 
   function switchTab(tab) {
