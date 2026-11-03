@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+  if (!sessionStorage.getItem('webcode_logged_in_user')) {
+    window.location.href = 'admin.html';
+  }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WEBCODE Institute — Education That Prepares You For Tomorrow</title>
 <meta name="description" content="WEBCODE Institute — professional IT and design education. Courses in web development, UI/UX design and digital marketing.">
@@ -9,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-  /* Apply saved theme before paint (prevents flash) */
   (function () {
     try {
       var t = localStorage.getItem('webcode-theme');
@@ -20,9 +24,6 @@
   })();
 </script>
 <style>
-/* ============================================================
-   RESET & VARIABLES
-   ============================================================ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 :root {
@@ -56,9 +57,6 @@ h1,h2,h3,h4,h5{line-height:1.25;font-weight:700;letter-spacing:-.015em}
 .container{width:100%;max-width:1250px;margin:0 auto;padding:0 24px}
 section{padding:90px 0;position:relative}
 
-/* ============================================================
-   BUTTONS
-   ============================================================ */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   font-family:var(--font-main);font-weight:600;font-size:.9rem;
@@ -72,9 +70,6 @@ section{padding:90px 0;position:relative}
 .btn-outline{border-color:var(--border-color);color:var(--text-dark);background:transparent;}
 .btn-outline:hover{background:var(--navy-dark);color:#fff;border-color:var(--navy-dark);transform:translateY(-2px);}
 
-/* ============================================================
-   TOP BAR & NAVBAR
-   ============================================================ */
 .topbar { background-color: var(--navy-dark); color: #e2e8f0; font-size: 12px; padding: 8px 0; }
 .topbar .container { display: flex; justify-content: space-between; align-items: center; }
 .topbar-left { display: flex; gap: 20px; }
@@ -91,28 +86,16 @@ section{padding:90px 0;position:relative}
 }
 .navbar .container { display: flex; justify-content: space-between; align-items: center; }
 
-/* Logo */
 .logo-wrap { display: flex; align-items: center; gap: 10px; }
-.logo-icon {
-  width: 48px; height: 48px; background-color: var(--bg-white); border: 2px solid var(--text-dark); border-radius: 50%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;
-}
-.logo-icon::before { content: ''; position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px; border: 1px solid var(--text-dark); border-radius: 50%; pointer-events: none; }
-.logo-icon span { font-size: 5px; font-weight: 700; text-transform: uppercase; color: var(--text-dark); line-height: 1.1; text-align: center; }
-.logo-icon .logo-main-text { font-size: 10px; font-weight: 800; }
 .logo-text-group { display: flex; flex-direction: column; }
 .logo-title { font-size: 20px; font-weight: 800; color: var(--text-dark); line-height: 1.1; letter-spacing: -0.5px; }
 .logo-subtitle { font-size: 8px; font-weight: 600; color: var(--text-gray); letter-spacing: 1px; text-transform: uppercase; }
 
-/* Nav Links */
 .nav-links { display: flex; gap: 24px; }
 .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-dark); transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); font-weight: 600; }
 
-/* Nav Right Cluster */
 .nav-right { display: flex; align-items: center; gap: 10px; }
-
-/* Nav Actions */
 .nav-actions { display: flex; gap: 10px; align-items: center; }
 .btn-header {
   display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: 5px;
@@ -120,7 +103,6 @@ section{padding:90px 0;position:relative}
 }
 .btn-header:hover { background-color: var(--gold-hover); transform: translateY(-2px); }
 
-/* ===== THEME TOGGLE BUTTON ===== */
 .theme-toggle {
   position: relative;
   width: 40px; height: 40px; flex-shrink: 0;
@@ -148,9 +130,8 @@ section{padding:90px 0;position:relative}
 .mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
 .mobile-menu-btn span { display: block; width: 24px; height: 2px; background-color: var(--text-dark); border-radius: 2px; }
 
-/* ============================================================
-   HERO SECTION
-   ============================================================ */
+.mobile-menu-actions { display: none; }
+
 .hero { position: relative; height: 70vh; min-height: 500px; max-height: 650px; overflow: hidden; display: flex; align-items: center; background-color: var(--navy-dark); }
 .hero-slide { position: absolute; inset: 0; display: flex; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s; }
 .hero-slide.active { opacity: 1; visibility: visible; }
@@ -176,9 +157,6 @@ section{padding:90px 0;position:relative}
 .hero-dots button { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: 0.3s; }
 .hero-dots button.active { width: 24px; border-radius: 10px; background: var(--gold); }
 
-/* ============================================================
-   WELCOME SECTION
-   ============================================================ */
 .welcome { background: var(--bg-white); text-align: center; }
 .section-tag { color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; display: block; }
 .section-title { font-size: 36px; font-weight: 800; color: var(--navy-dark); margin-bottom: 16px; letter-spacing: -0.5px; }
@@ -199,13 +177,9 @@ section{padding:90px 0;position:relative}
 .link-arrow { color: var(--gold); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.3s; }
 .link-arrow:hover { gap: 10px; }
 
-/* ============================================================
-   COURSES SECTION (UNIFORM CARDS + PREMIUM HOVER)
-   ============================================================ */
 .courses { background: var(--bg-light); }
 .course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
-/* Card Main Style */
 .course-card {
   background: var(--bg-white); border-radius: 16px; padding: 30px 24px; 
   box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
@@ -213,13 +187,11 @@ section{padding:90px 0;position:relative}
   z-index: 1; overflow: hidden;
 }
 
-/* Blue Background Fill Effect */
 .course-card::before {
   content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 0;
   background-color: var(--heading-blue); transition: height 0.4s ease; z-index: -1;
 }
 
-/* Premium Hover Border & Shadow for ALL cards */
 .course-card:hover { 
   transform: translateY(-12px) scale(1.02); 
   box-shadow: 0 0 25px rgba(245, 179, 1, 0.4), 0 30px 60px rgba(0,0,0,0.15); 
@@ -252,9 +224,6 @@ section{padding:90px 0;position:relative}
 .btn-apply { font-size: 13px; font-weight: 600; color: var(--text-dark); display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; }
 .course-card:hover .btn-apply { color: var(--gold); gap: 12px; }
 
-/* ============================================================
-   ABOUT SECTION
-   ============================================================ */
 .about { background: var(--bg-white); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
 .about-img-wrapper { position: relative; }
@@ -271,18 +240,12 @@ section{padding:90px 0;position:relative}
 .mini-card h4 { font-size: 14px; font-weight: 600; color: var(--navy-dark); margin-bottom: 4px; }
 .mini-card p { font-size: 11px; margin: 0; line-height: 1.4; }
 
-/* ============================================================
-   STATS SECTION
-   ============================================================ */
 .stats { padding: 60px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); background: var(--bg-white); }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
 .stat-item h3 { font-size: 36px; font-weight: 800; color: var(--navy-dark); margin-bottom: 4px; }
 .stat-item p { font-size: 13px; font-weight: 500; color: var(--text-gray); margin: 0; }
 .stat-item:not(:last-child) { border-right: 1px solid var(--border-color); }
 
-/* ============================================================
-   WHY CHOOSE SECTION
-   ============================================================ */
 .why { background: var(--navy-dark); color: #fff; }
 .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .why-content h3 { font-size: 36px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; color: #fff; }
@@ -304,9 +267,6 @@ section{padding:90px 0;position:relative}
 .why-mini-badge { position: absolute; bottom: 20px; left: 20px; background: #fff; color: var(--navy-dark); padding: 10px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .why-mini-badge span { font-size: 20px; font-weight: 800; color: var(--gold); line-height: 1; }
 
-/* ============================================================
-   TESTIMONIALS SECTION
-   ============================================================ */
 .testimonials { background: var(--bg-white); text-align: center; }
 .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: center; margin-top: 50px; }
 .testimonial-card { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; text-align: left; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
@@ -322,9 +282,15 @@ section{padding:90px 0;position:relative}
 .user-info p { font-size: 11px; color: var(--text-gray); margin: 0; }
 .testimonial-card.active .user-info p { color: #94a3b8; }
 
-/* ============================================================
-   GALLERY SECTION
-   ============================================================ */
+.comments-section { background: var(--bg-light); padding: 80px 0; }
+.comment-card { background: var(--bg-white); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+.comment-card h4 { color: var(--gold); margin-bottom: 5px; font-size: 16px; }
+.comment-card p { color: var(--text-dark); font-size: 14px; margin-bottom: 10px; }
+.comment-card span { color: var(--text-gray); font-size: 11px; }
+.comment-form-box { max-width: 600px; margin: 0 auto 50px; background: var(--bg-white); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
+.comment-form-box input, .comment-form-box textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-white); color: var(--text-dark); font-family: inherit; font-size: 14px; outline: none; transition: border 0.3s; }
+.comment-form-box input:focus, .comment-form-box textarea:focus { border-color: var(--gold); }
+
 .gallery { background: var(--bg-light); text-align: center; }
 .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 200px); gap: 16px; margin-top: 50px; margin-bottom: 40px; }
 .gallery-item { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; }
@@ -339,9 +305,6 @@ section{padding:90px 0;position:relative}
 .gallery-item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
 .gallery-item:nth-child(5) { grid-column: span 1; grid-row: span 1; }
 
-/* ============================================================
-   CTA SECTION
-   ============================================================ */
 .cta { background: var(--bg-white); padding: 0 0 90px; }
 .cta-box { background: linear-gradient(135deg, #0f2557, #071026); border-radius: 24px; padding: 60px; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(7,16,38,0.3); }
 .cta-box::before { content: ''; position: absolute; top: -50%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,179,1,0.15) 0%, transparent 70%); border-radius: 50%; }
@@ -355,14 +318,8 @@ section{padding:90px 0;position:relative}
 .cta-circle svg { width: 40px; height: 40px; fill: var(--navy-dark); margin-bottom: 8px; }
 .cta-circle h4 { font-size: 14px; font-weight: 800; line-height: 1.2; margin: 0; text-transform: uppercase; color: var(--navy-dark); }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
 .footer { background: var(--navy-dark); color: #94a3b8; padding-top: 70px; border-top: 4px solid var(--gold); }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; padding-bottom: 50px; }
-.footer-logo .logo-icon { background-color: #fff !important; border-color: #fff !important; }
-.footer-logo .logo-icon::before { border-color: var(--navy-dark) !important; }
-.footer-logo .logo-icon span { color: var(--navy-dark) !important; }
 .footer-logo .logo-title { color: #fff !important; }
 .footer-logo .logo-subtitle { color: #94a3b8 !important; }
 .footer-desc { font-size: 13px; line-height: 1.7; margin: 20px 0; max-width: 280px; color: #94a3b8; }
@@ -384,12 +341,8 @@ section{padding:90px 0;position:relative}
 .footer-bottom-links { display: flex; gap: 20px; }
 .footer-bottom-links a:hover { color: var(--gold); }
 
-/* ============================================================
-   DARK THEME
-   ============================================================ */
 [data-theme="dark"] {
   color-scheme: dark;
-
   --navy-dark: #0e1a33;
   --heading-blue: #16264a;
   --gold: #f5b301;
@@ -401,12 +354,10 @@ section{padding:90px 0;position:relative}
   --border-color: #1c2740;
 }
 
-/* Smooth colour cross-fade between themes */
 body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial-card {
   transition: background-color .35s ease, border-color .35s ease, color .35s ease;
 }
 
-/* Headings that were forced to the navy colour */
 [data-theme="dark"] .section-title,
 [data-theme="dark"] .welcome-content h3,
 [data-theme="dark"] .about-content h3,
@@ -416,17 +367,11 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   color: var(--text-dark);
 }
 
-/* Big watermark numbers on course cards */
 [data-theme="dark"] .course-num { color: #16213a; }
 [data-theme="dark"] .course-card:hover .course-num { color: rgba(255,255,255,0.08); }
 
-/* Quote glyph on testimonials */
 [data-theme="dark"] .quote-icon { color: #1e2b45; }
-
-/* Badge ring matches the page background */
 [data-theme="dark"] .about-badge { border-color: var(--bg-white); }
-
-/* Navbar / panel depth */
 [data-theme="dark"] .navbar { box-shadow: 0 4px 24px rgba(0,0,0,.55); }
 [data-theme="dark"] .course-card { box-shadow: 0 10px 30px rgba(0,0,0,.35); }
 [data-theme="dark"] .testimonial-card { box-shadow: 0 10px 30px rgba(0,0,0,.35); }
@@ -434,22 +379,17 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 [data-theme="dark"] .cta-box { border: 1px solid var(--border-color); }
 [data-theme="dark"] .mini-card { border: 1px solid var(--border-color); }
 
-/* Outline buttons need a lighter hover surface in dark mode */
 [data-theme="dark"] .btn-outline:hover {
   background: #1b2c4d;
   border-color: var(--gold);
 }
 
-/* Solid navy button needs a touch more separation */
 [data-theme="dark"] .btn-navy {
   background: var(--heading-blue);
   box-shadow: inset 0 0 0 1px var(--border-color);
 }
 [data-theme="dark"] .btn-navy:hover { background: #1d3566; }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media (max-width: 1024px) {
   .welcome-grid, .about-grid, .why-grid { grid-template-columns: 1fr; gap: 40px; }
   .course-grid, .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
@@ -463,7 +403,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
 
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
-
   .cta-box { flex-direction: column; text-align: center; gap: 40px; padding: 50px 40px; }
   .cta-text { max-width: 100%; }
   .cta-btns { justify-content: center; }
@@ -478,15 +417,14 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .cta-text h2 { font-size: 32px; }
 }
 
-/* ---------- Mobile (≤ 768px) ---------- */
 @media (max-width: 768px) {
   section { padding: 60px 0; }
   .container { padding: 0 18px; }
 
-  /* Topbar & Nav */
   .topbar { display: none; }
   .nav-links, .nav-actions { display: none; }
   .mobile-menu-btn { display: flex; }
+  
   .nav-links.active {
     display: flex;
     flex-direction: column;
@@ -504,7 +442,14 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .nav-links.active a:last-child { border-bottom: none; }
   [data-theme="dark"] .nav-links.active a { border-bottom-color: var(--border-color); }
 
-  /* Hero — height bug fix */
+  .mobile-menu-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+  }
+
   .hero { height: auto; min-height: 500px; max-height: none; padding: 0; }
   .hero h1 { font-size: 2rem; }
   .hero p { font-size: 14px; margin-bottom: 24px; }
@@ -514,13 +459,11 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .hero-btns .btn { flex: 1 1 auto; justify-content: center; }
   .hero-dots { bottom: 14px; }
 
-  /* Typography */
   .section-title { font-size: 26px; }
   .section-desc { font-size: 14px; margin-bottom: 36px; }
   .welcome-content h3, .about-content h3, .why-content h3 { font-size: 24px; }
   .cta-text h2 { font-size: 26px; }
 
-  /* Grids */
   .course-grid, .testimonial-grid { grid-template-columns: 1fr; gap: 20px; }
   .stats-grid { grid-template-columns: 1fr; gap: 0; }
   .stats .stat-item {
@@ -531,17 +474,13 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   }
   .stats .stat-item:last-child { border-bottom: none; }
 
-  /* Welcome */
   .feature-box { padding: 28px; }
-
-  /* About */
   .about-img { height: 300px; }
   .about-badge { bottom: 10px; right: 10px; padding: 16px 20px; border-width: 3px; }
   .about-badge strong { font-size: 22px; }
   .about-badge small { font-size: 10px; }
   .mini-cards { flex-direction: column; gap: 12px; }
 
-  /* Why */
   .why-graphic { padding: 30px 24px; border-radius: 18px; }
   .why-graphic h2 { font-size: 24px; }
   .why-graphic-badge { font-size: 10px; padding: 6px 12px; top: 14px; right: 14px; }
@@ -550,12 +489,10 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .why-mini-badge { bottom: 12px; left: 12px; padding: 8px 12px; font-size: 11px; }
   .why-mini-badge span { font-size: 16px; }
 
-  /* Testimonials */
   .testimonial-card { padding: 24px; }
   .testimonial-card.active { transform: none; }
   .testimonial-grid { margin-top: 30px; }
 
-  /* Gallery */
   .gallery-grid {
     grid-template-columns: 1fr;
     grid-template-rows: none;
@@ -567,7 +504,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
   .gallery-overlay h4 { font-size: 15px; }
 
-  /* CTA */
   .cta { padding-bottom: 60px; }
   .cta-box { padding: 36px 22px; border-radius: 18px; }
   .cta-btns { flex-wrap: wrap; justify-content: center; }
@@ -576,7 +512,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .cta-circle svg { width: 30px; height: 30px; }
   .cta-circle h4 { font-size: 12px; }
 
-  /* Footer */
   .footer { padding-top: 50px; }
   .footer-grid { grid-template-columns: 1fr; gap: 30px; padding-bottom: 30px; }
   .footer-bottom .container { flex-direction: column; gap: 10px; text-align: center; }
@@ -584,7 +519,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .footer-desc { max-width: 100%; }
 }
 
-/* ---------- Small phones (≤ 480px) ---------- */
 @media (max-width: 480px) {
   .hero h1 { font-size: 1.7rem; }
   .hero-btns .btn { width: 100%; }
@@ -592,7 +526,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .welcome-content h3, .about-content h3, .why-content h3 { font-size: 20px; }
   .cta-text h2 { font-size: 22px; }
   .course-title { font-size: 18px; }
-  .logo-icon { width: 42px; height: 42px; }
   .logo-title { font-size: 17px; }
   .logo-subtitle { font-size: 7px; letter-spacing: 0.5px; }
   .cta-box { padding: 30px 18px; }
@@ -606,7 +539,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 </head>
 <body>
 
-<!-- ============ TOP BAR ============ -->
 <div class="topbar">
   <div class="container">
     <div class="topbar-left">
@@ -625,15 +557,10 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </div>
 
-<!-- ============ NAVBAR ============ -->
 <nav class="navbar">
   <div class="container">
     <a href="./index.html" class="logo-wrap">
-      <div class="logo-icon">
-        <span>WEB</span>
-        <span class="logo-main-text">CODE</span>
-        <span>INSTITUTE</span>
-      </div>
+      <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 3px solid #000000;">
       <div class="logo-text-group">
         <div class="logo-title">WEBCODE</div>
         <div class="logo-subtitle">Institute of IT &amp; Languages</div>
@@ -648,15 +575,18 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
       <li><a href="./faculty.html">Faculty</a></li>
       <li><a href="./Gallery.html">Gallery</a></li>
       <li><a href="./Contact.html">Contact</a></li>
+      <li class="mobile-menu-actions">
+        <a href="./Admissions.html" class="btn-header" style="width: 100%; margin-bottom: 10px;">Apply Now</a>
+        <a href="#" onclick="logoutUser()" class="btn-header" style="background-color: #ef4444; color: white; width: 100%;">Logout</a>
+      </li>
     </ul>
 
     <div class="nav-right">
       <div class="nav-actions">
         <a href="./Admissions.html" class="btn-header">Apply Now</a>
-        <a href="./admin.html" class="btn-header">Admin Login</a>
+        <a href="#" onclick="logoutUser()" class="btn-header" style="background-color: #ef4444; color: white;">Logout</a>
       </div>
 
-      <!-- THEME TOGGLE -->
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.5 4.93l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zm13.46 13.46l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zM1 11h3v2H1v-2zm19 0h3v2h-3v-2zM4.93 19.5l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13zM18.38 6.04l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13z"/>
@@ -671,10 +601,9 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </nav>
 
-<!-- ============ HERO SECTION ============ -->
 <section class="hero" id="home">
   <div class="hero-slide active">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1920&auto=format&fit=crop');"></div>
+    <div class="hero-bg" style="background-image: url('./web\ exm.jpg');"></div>
     <div class="container">
       <div class="hero-content">
         <div class="hero-tag">PRACTICAL • MODERN • CAREER FOCUSED</div>
@@ -689,7 +618,7 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 
   <div class="hero-slide">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920&auto=format&fit=crop');"></div>
+    <div class="hero-bg" style="background-image: url('./calsroom.jpg');"></div>
     <div class="container">
       <div class="hero-content">
         <div class="hero-tag">LEARN • GROW • SUCCEED</div>
@@ -708,7 +637,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
-<!-- ============ WELCOME SECTION ============ -->
 <section class="welcome">
   <div class="container">
     <span class="section-tag">WELCOME TO WEBCODE</span>
@@ -745,7 +673,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ COURSES SECTION ============ -->
 <section class="courses">
   <div class="container">
     <span class="section-tag">OUR PROGRAMS</span>
@@ -754,7 +681,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 
     <div class="course-grid">
       
-      <!-- Card 1 -->
       <div class="course-card">
         <div class="course-num">01</div>
         <div class="course-icon">
@@ -770,7 +696,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
         <a href="./Courses.html" class="btn-apply">Apply Now →</a>
       </div>
 
-      <!-- Card 2 -->
       <div class="course-card">
         <div class="course-num">02</div>
         <div class="course-icon">
@@ -786,7 +711,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
         <a href="./Courses.html" class="btn-apply">Apply Now →</a>
       </div>
 
-      <!-- Card 3 -->
       <div class="course-card">
         <div class="course-num">03</div>
         <div class="course-icon">
@@ -806,13 +730,12 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ ABOUT SECTION ============ -->
 <section class="about">
   <div class="container">
     <div class="about-grid">
       
       <div class="about-img-wrapper">
-        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" alt="Classroom" class="about-img">
+        <img src="./subb.jpg" alt="Classroom" class="about-img">
         <div class="about-badge">
           <strong>10+</strong>
           <small>Years of<br>Academic Growth</small>
@@ -849,7 +772,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ STATS SECTION ============ -->
 <section class="stats">
   <div class="container">
     <div class="stats-grid">
@@ -873,7 +795,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ WHY CHOOSE SECTION ============ -->
 <section class="why">
   <div class="container">
     <div class="why-grid">
@@ -929,7 +850,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ TESTIMONIALS SECTION ============ -->
 <section class="testimonials">
   <div class="container">
     <span class="section-tag">STUDENT REVIEWS</span>
@@ -981,7 +901,27 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ GALLERY SECTION ============ -->
+<section class="comments-section">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="section-tag">Feedback</span>
+      <h2 class="section-title">Leave a <span>Comment</span></h2>
+      <p class="section-desc" style="margin-bottom: 0;">Share your thoughts or suggestions about our institute.</p>
+    </div>
+
+    <div class="comment-form-box">
+      <form id="commentForm">
+        <input type="text" id="commentName" placeholder="Your Name" required>
+        <textarea id="commentText" placeholder="Your Comment or Suggestion..." required style="min-height: 100px;"></textarea>
+        <button type="submit" class="btn btn-gold" style="width: 100%;">Post Comment</button>
+      </form>
+    </div>
+
+    <div id="commentsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
+    </div>
+  </div>
+</section>
+
 <section class="gallery">
   <div class="container">
     <span class="section-tag">OUR CAMPUS</span>
@@ -990,37 +930,37 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 
     <div class="gallery-grid">
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" alt="Lab">
+        <img src="./modern computer lab.jpg" alt="Lab">
         <div class="gallery-overlay">
           <span>Learning Space</span>
           <h4>Modern Computer Lab</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" alt="Classroom">
+        <img src="./za.jpg" alt="Classroom">
         <div class="gallery-overlay">
           <span>Education</span>
           <h4>Classroom</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Office">
+        <img src="./office.jpg" alt="Office">
         <div class="gallery-overlay">
           <span>Administration</span>
           <h4>Office</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" alt="Training">
+        <img src="./traning (1).jpg" alt="Training">
         <div class="gallery-overlay">
           <span>Practical</span>
           <h4>IT Training</h4>
         </div>
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop" alt="Students">
+        <img src="./presentation.jpg" alt="Students">
         <div class="gallery-overlay">
-          <span>Student Life</span>
+          <span>Students Presentation</span>
           <h4>Our Students</h4>
         </div>
       </div>
@@ -1030,7 +970,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ CTA SECTION ============ -->
 <section class="cta">
   <div class="container">
     <div class="cta-box">
@@ -1051,18 +990,13 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       
       <div class="footer-logo">
         <a href="./index.html" class="logo-wrap">
-          <div class="logo-icon">
-            <span>WEB</span>
-            <span class="logo-main-text">CODE</span>
-            <span>INSTITUTE</span>
-          </div>
+          <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff;">
           <div class="logo-text-group">
             <div class="logo-title">WEBCODE</div>
             <div class="logo-subtitle">Institute of IT &amp; Languages</div>
@@ -1146,9 +1080,11 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 </footer>
 
 <script>
-  /* ============================================================
-     THEME TOGGLE (Dark / Light)
-     ============================================================ */
+  function logoutUser() {
+    sessionStorage.removeItem('webcode_logged_in_user');
+    window.location.href = 'admin.html';
+  }
+
   (function () {
     const root = document.documentElement;
     const toggle = document.getElementById('themeToggle');
@@ -1162,7 +1098,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
       try { localStorage.setItem('webcode-theme', theme); } catch (e) {}
     }
 
-    /* Sync button state with the theme applied in <head> */
     applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
     toggle.addEventListener('click', function () {
@@ -1171,18 +1106,12 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
     });
   })();
 
-  /* ============================================================
-     MOBILE MENU
-     ============================================================ */
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const navLinks = document.getElementById('navLinks');
   mobileMenuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
 
-  /* ============================================================
-     HERO SLIDER
-     ============================================================ */
   const heroSlides = document.querySelectorAll('.hero-slide');
   const heroDots   = document.getElementById('heroDots');
   let heroIndex    = 0;
@@ -1220,6 +1149,44 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   heroEl.addEventListener('mouseleave', restartHeroTimer);
 
   restartHeroTimer();
+
+  const commentForm = document.getElementById('commentForm');
+  const commentsList = document.getElementById('commentsList');
+  let savedComments = JSON.parse(localStorage.getItem('webcode_comments')) || [];
+
+  function renderComments() {
+    commentsList.innerHTML = '';
+    if (savedComments.length === 0) {
+      commentsList.innerHTML = '<p style="text-align: center; color: var(--text-gray); grid-column: 1/-1;">No comments yet. Be the first to comment!</p>';
+      return;
+    }
+    savedComments.forEach(comment => {
+      const div = document.createElement('div');
+      div.className = 'comment-card';
+      div.innerHTML = `
+        <h4>${comment.name}</h4>
+        <p>${comment.text}</p>
+        <span>${comment.date}</span>
+      `;
+      commentsList.appendChild(div);
+    });
+  }
+
+  if (commentForm) {
+    commentForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('commentName').value.trim();
+      const text = document.getElementById('commentText').value.trim();
+      const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      const newComment = { name, text, date };
+      savedComments.unshift(newComment);
+      localStorage.setItem('webcode_comments', JSON.stringify(savedComments));
+      commentForm.reset();
+      renderComments();
+    });
+  }
+  
+  renderComments();
 </script>
 </body>
 </html>

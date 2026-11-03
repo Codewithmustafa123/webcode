@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us - WEBCODE Institute</title>
+<script>
+  if (!sessionStorage.getItem('webcode_logged_in_user')) {
+    window.location.href = 'admin.html';
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-  /* Theme load before paint (prevents flash) */
   (function () {
     try {
       var t = localStorage.getItem('webcode-theme');
@@ -19,7 +23,6 @@
   })();
 </script>
 <style>
-/* ============ RESET & VARIABLES ============ */
 *,
 *::before,
 *::after {
@@ -44,7 +47,6 @@
   --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
 }
 
-/* ============ DARK THEME ============ */
 [data-theme="dark"] {
   color-scheme: dark;
   --navy-dark: #0e1a33;
@@ -60,17 +62,6 @@
   --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
 }
 
-/* Dark Mode Specific Fixes */
-[data-theme="dark"] .logo-icon {
-  background-color: #ffffff;
-  border-color: #081431;
-}
-[data-theme="dark"] .logo-icon::before {
-  border-color: #081431;
-}
-[data-theme="dark"] .logo-icon span {
-  color: #081431;
-}
 [data-theme="dark"] .logo-title,
 [data-theme="dark"] .nav-links a,
 [data-theme="dark"] .mobile-menu-btn span {
@@ -124,17 +115,6 @@
   border-bottom-color: #1c2740;
 }
 
-/* Footer Logo Fix */
-[data-theme="dark"] .footer-logo .logo-icon {
-  background-color: #ffffff !important;
-  border-color: #081431 !important;
-}
-[data-theme="dark"] .footer-logo .logo-icon::before {
-  border-color: #081431 !important;
-}
-[data-theme="dark"] .footer-logo .logo-icon span {
-  color: #081431 !important;
-}
 [data-theme="dark"] .footer-logo .logo-title {
   color: #ffffff !important;
 }
@@ -160,7 +140,6 @@ img { max-width: 100%; display: block; }
   padding: 0 24px;
 }
 
-/* ============ TOP BAR ============ */
 .topbar {
   background-color: var(--navy-dark);
   color: #e2e8f0;
@@ -192,7 +171,6 @@ img { max-width: 100%; display: block; }
   fill: var(--gold);
 }
 
-/* ============ NAVBAR ============ */
 .navbar {
   background-color: var(--white);
   padding: 15px 0;
@@ -211,42 +189,6 @@ img { max-width: 100%; display: block; }
 }
 
 .logo-wrap { display: flex; align-items: center; gap: 12px; }
-
-.logo-icon {
-  width: 50px; height: 50px;
-  background-color: var(--white);
-  border: 2px solid var(--navy-dark);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.35s ease, background-color 0.35s ease;
-}
-
-.logo-icon::before {
-  content: '';
-  position: absolute;
-  top: 2px; left: 2px; right: 2px; bottom: 2px;
-  border: 1px solid var(--navy-dark);
-  border-radius: 50%;
-  pointer-events: none;
-  transition: border-color 0.35s ease;
-}
-
-.logo-icon span {
-  font-size: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--navy-dark);
-  line-height: 1.1;
-  text-align: center;
-  transition: color 0.35s ease;
-}
-
-.logo-icon .logo-main-text { font-size: 10px; font-weight: 800; }
 .logo-text-group { display: flex; flex-direction: column; }
 
 .logo-title {
@@ -300,7 +242,6 @@ img { max-width: 100%; display: block; }
   transform: translateY(-2px);
 }
 
-/* ===== THEME TOGGLE BUTTON ===== */
 .theme-toggle {
   position: relative;
   width: 40px; height: 40px; flex-shrink: 0;
@@ -344,7 +285,6 @@ img { max-width: 100%; display: block; }
   transition: background-color 0.35s ease;
 }
 
-/* ============ HERO SECTION ============ */
 .hero {
   background-color: var(--navy-blue);
   padding: 100px 0 120px;
@@ -401,7 +341,6 @@ img { max-width: 100%; display: block; }
   font-weight: 300;
 }
 
-/* ============ OUR STORY SECTION ============ */
 .story-section {
   padding: 100px 0;
   background-color: var(--white);
@@ -522,7 +461,6 @@ img { max-width: 100%; display: block; }
   z-index: 2;
 }
 
-/* ============ CORE VALUES SECTION ============ */
 .values-section {
   padding: 100px 0;
   background-color: var(--bg-light);
@@ -605,7 +543,6 @@ img { max-width: 100%; display: block; }
   line-height: 1.7;
 }
 
-/* ============ FOOTER ============ */
 .footer {
   background-color: var(--navy-dark);
   color: #94a3b8;
@@ -717,7 +654,6 @@ img { max-width: 100%; display: block; }
 .footer-bottom-links { display: flex; gap: 24px; }
 .footer-bottom-links a:hover { color: var(--gold); }
 
-/* ============ RESPONSIVE ============ */
 @media (max-width: 1024px) {
   .hero h1 { font-size: 52px; }
   .story-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -761,7 +697,6 @@ img { max-width: 100%; display: block; }
 </head>
 <body>
 
-<!-- ============ TOP BAR ============ -->
 <div class="topbar">
   <div class="container">
     <div class="topbar-left">
@@ -780,15 +715,10 @@ img { max-width: 100%; display: block; }
   </div>
 </div>
 
-<!-- ============ NAVBAR ============ -->
 <nav class="navbar">
   <div class="container">
     <a href="./index.html" class="logo-wrap">
-      <div class="logo-icon">
-        <span>WEB</span>
-        <span class="logo-main-text">CODE</span>
-        <span>INSTITUTE</span>
-      </div>
+      <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 3px solid #000000;">
       <div class="logo-text-group">
         <div class="logo-title">WEBCODE</div>
         <div class="logo-subtitle">Institute of IT &amp; Languages</div>
@@ -808,10 +738,9 @@ img { max-width: 100%; display: block; }
     <div class="nav-right">
       <div class="nav-actions">
         <a href="./Admissions.html" class="btn-header">Apply Now</a>
-        <a href="./admin.html" class="btn-header">Admin Login</a>
+        <a href="#" onclick="logoutUser()" class="btn-header" style="background-color: #ef4444; color: white;">Logout</a>
       </div>
 
-      <!-- THEME TOGGLE BUTTON -->
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.5 4.93l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zm13.46 13.46l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zM1 11h3v2H1v-2zm19 0h3v2h-3v-2zM4.93 19.5l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13zM18.38 6.04l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13z"/>
@@ -830,7 +759,6 @@ img { max-width: 100%; display: block; }
   </div>
 </nav>
 
-<!-- ============ HERO SECTION ============ -->
 <section class="hero">
   <div class="container">
     <span class="section-tag">About Us</span>
@@ -839,7 +767,6 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============ OUR STORY SECTION ============ -->
 <section class="story-section">
   <div class="container">
     <div class="story-grid">
@@ -858,7 +785,6 @@ img { max-width: 100%; display: block; }
 
       <div class="story-cards">
         
-        <!-- Card 1: Our Mission -->
         <div class="story-card">
           <div class="card-icon">
             <span>M</span>
@@ -867,7 +793,6 @@ img { max-width: 100%; display: block; }
           <p>To provide practical, accessible and career-focused education that helps learners develop valuable skills and confidence.</p>
         </div>
 
-        <!-- Card 2: Our Vision -->
         <div class="story-card">
           <div class="card-icon">
             <span>V</span>
@@ -882,7 +807,6 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============ CORE VALUES SECTION ============ -->
 <section class="values-section">
   <div class="container">
     <div class="values-header">
@@ -893,7 +817,6 @@ img { max-width: 100%; display: block; }
 
     <div class="values-grid">
       
-      <!-- Value 1 -->
       <div class="value-card">
         <div class="value-icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
@@ -902,7 +825,6 @@ img { max-width: 100%; display: block; }
         <p>We emphasize practical skills that students can apply beyond the classroom.</p>
       </div>
 
-      <!-- Value 2 -->
       <div class="value-card">
         <div class="value-icon-wrap">
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -911,7 +833,6 @@ img { max-width: 100%; display: block; }
         <p>We aim to provide an engaging and supportive learning experience for every student.</p>
       </div>
 
-      <!-- Value 3 -->
       <div class="value-card">
         <div class="value-icon-wrap">
           <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -924,19 +845,13 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       
-      <!-- Column 1: Logo & Desc -->
       <div class="footer-logo">
         <a href="./index.html" class="logo-wrap">
-          <div class="logo-icon">
-            <span>WEB</span>
-            <span class="logo-main-text">CODE</span>
-            <span>INSTITUTE</span>
-          </div>
+          <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff;">
           <div class="logo-text-group">
             <div class="logo-title">WEBCODE</div>
             <div class="logo-subtitle">Institute of IT &amp; Languages</div>
@@ -960,7 +875,6 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <!-- Column 2: Quick Links -->
       <div class="footer-col">
         <h4>Quick Links</h4>
          <ul class="footer-links">
@@ -974,7 +888,6 @@ img { max-width: 100%; display: block; }
         </ul>
       </div>
 
-      <!-- Column 3: Our Courses -->
       <div class="footer-col">
         <h4>Our Courses</h4>
         <ul class="footer-links">
@@ -984,7 +897,6 @@ img { max-width: 100%; display: block; }
         </ul>
       </div>
 
-      <!-- Column 4: Contact Us -->
       <div class="footer-col">
         <h4>Contact Us</h4>
         <ul class="footer-contact">
@@ -1006,7 +918,6 @@ img { max-width: 100%; display: block; }
     </div>
   </div>
 
-  <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="container">
       <div>© 2026 WebCode Institute. All Rights Reserved.</div>
@@ -1019,9 +930,11 @@ img { max-width: 100%; display: block; }
 </footer>
 
 <script>
-  /* ============================================================
-     THEME TOGGLE (Dark / Light)
-     ============================================================ */
+  function logoutUser() {
+    sessionStorage.removeItem('webcode_logged_in_user');
+    window.location.href = 'admin.html';
+  }
+
   (function () {
     const root = document.documentElement;
     const toggle = document.getElementById('themeToggle');
@@ -1035,19 +948,14 @@ img { max-width: 100%; display: block; }
       try { localStorage.setItem('webcode-theme', theme); } catch (e) {}
     }
 
-    // Set initial state
     applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
-    // Toggle on click
     toggle.addEventListener('click', function () {
       const isDark = root.getAttribute('data-theme') === 'dark';
       applyTheme(isDark ? 'light' : 'dark');
     });
   })();
 
-  /* ============================================================
-     MOBILE MENU
-     ============================================================ */
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const navLinks = document.getElementById('navLinks');
 

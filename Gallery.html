@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gallery - WEBCODE Institute</title>
+<script>
+  if (!sessionStorage.getItem('webcode_logged_in_user')) {
+    window.location.href = 'admin.html';
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-  /* Theme load before paint (prevents flash) */
   (function () {
     try {
       var t = localStorage.getItem('webcode-theme');
@@ -19,7 +23,6 @@
   })();
 </script>
 <style>
-/* ============ RESET & VARIABLES ============ */
 *,
 *::before,
 *::after {
@@ -46,7 +49,6 @@
   --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
 }
 
-/* ============ DARK THEME ============ */
 [data-theme="dark"] {
   color-scheme: dark;
   --navy-dark: #0e1a33; 
@@ -64,17 +66,10 @@
   --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
 }
 
-/* Dark Mode Text Fixes (Taake text white show ho) */
 [data-theme="dark"] .logo-title,
 [data-theme="dark"] .nav-links a,
-[data-theme="dark"] .logo-icon span,
 [data-theme="dark"] .gallery-header h2 {
   color: var(--text-dark);
-}
-
-[data-theme="dark"] .logo-icon,
-[data-theme="dark"] .logo-icon::before {
-  border-color: var(--text-dark);
 }
 
 [data-theme="dark"] .mobile-menu-btn span {
@@ -88,20 +83,9 @@
 }
 
 [data-theme="dark"] .btn-header {
-  color: #081431; /* Gold button pe dark text */
+  color: #081431;
 }
 
-/* Footer Logo Fix */
-[data-theme="dark"] .footer-logo .logo-icon {
-  background-color: #ffffff !important;
-  border-color: #081431 !important;
-}
-[data-theme="dark"] .footer-logo .logo-icon::before {
-  border-color: #081431 !important;
-}
-[data-theme="dark"] .footer-logo .logo-icon span {
-  color: #081431 !important;
-}
 [data-theme="dark"] .footer-logo .logo-title {
   color: #ffffff !important;
 }
@@ -127,7 +111,6 @@ img { max-width: 100%; display: block; }
   padding: 0 24px;
 }
 
-/* ============ TOP BAR ============ */
 .topbar {
   background-color: var(--navy-dark);
   color: #e2e8f0;
@@ -155,7 +138,6 @@ img { max-width: 100%; display: block; }
 .topbar-item:hover { color: var(--gold); }
 .topbar-item svg { width: 14px; height: 14px; fill: var(--gold); }
 
-/* ============ NAVBAR ============ */
 .navbar {
   background-color: var(--bg-white);
   padding: 15px 0;
@@ -172,43 +154,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
 }
 
-/* Logo */
 .logo-wrap { display: flex; align-items: center; gap: 12px; }
-
-.logo-icon {
-  width: 54px; height: 54px;
-  background-color: var(--bg-white);
-  border: 2px solid var(--navy-dark);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: border-color 0.35s ease, background-color 0.35s ease;
-}
-
-.logo-icon::before {
-  content: '';
-  position: absolute;
-  top: 3px; left: 3px; right: 3px; bottom: 3px;
-  border: 1px solid var(--navy-dark);
-  border-radius: 50%;
-  pointer-events: none;
-  transition: border-color 0.35s ease;
-}
-
-.logo-icon span {
-  font-size: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--navy-dark);
-  line-height: 1.1;
-  text-align: center;
-  transition: color 0.35s ease;
-}
-
-.logo-icon .logo-main-text { font-size: 11px; font-weight: 800; }
 .logo-text-group { display: flex; flex-direction: column; }
 
 .logo-title {
@@ -263,7 +209,6 @@ img { max-width: 100%; display: block; }
   transform: translateY(-2px);
 }
 
-/* ===== THEME TOGGLE BUTTON ===== */
 .theme-toggle {
   position: relative;
   width: 40px; height: 40px; flex-shrink: 0;
@@ -306,7 +251,6 @@ img { max-width: 100%; display: block; }
   transition: background-color 0.35s ease;
 }
 
-/* ============ HERO SECTION ============ */
 .hero {
   background-color: var(--hero-blue);
   padding: 90px 0 110px;
@@ -363,7 +307,6 @@ img { max-width: 100%; display: block; }
   font-weight: 400;
 }
 
-/* ============ GALLERY SECTION ============ */
 .gallery-section {
   padding: 100px 0 120px;
   background-color: var(--bg-light);
@@ -426,14 +369,13 @@ img { max-width: 100%; display: block; }
 
 .gallery-item:hover .img-placeholder { transform: scale(1.05); }
 
-/* Image Paths */
 .bg-corridor { background-image: url('./office.jpg');}
 .bg-computer-lab { background-image: url('./modern\ computer\ lab.jpg'); }
 .bg-classroom { background-image: url(./classroom.jpg); }
 .bg-office { background-image: url('./office.jpg');}
 .bg-training { background-image: url('./traning\ \(1\).jpg'); }
 .bg-activities { background-image: url('./students\ actives.png'); }
-.bg-events { background-image: url('./calsroom.jpg'); }
+.bg-events { background-image: url('./event.jpg'); }
 
 .gallery-overlay {
   position: absolute;
@@ -468,7 +410,6 @@ img { max-width: 100%; display: block; }
   font-weight: 300;
 }
 
-/* ============ FOOTER ============ */
 .footer {
   background-color: var(--navy-dark);
   color: #94a3b8;
@@ -595,7 +536,6 @@ img { max-width: 100%; display: block; }
 .footer-bottom-links a { transition: color 0.3s; }
 .footer-bottom-links a:hover { color: var(--gold); }
 
-/* ============ RESPONSIVE DESIGN ============ */
 @media (max-width: 1024px) {
   .hero h1 { font-size: 52px; }
   .gallery-grid { grid-auto-rows: 200px; }
@@ -641,7 +581,6 @@ img { max-width: 100%; display: block; }
 </head>
 <body>
 
-<!-- ============ TOP BAR ============ -->
 <div class="topbar">
   <div class="container">
     <div class="topbar-left">
@@ -660,22 +599,17 @@ img { max-width: 100%; display: block; }
   </div>
 </div>
 
-<!-- ============ NAVBAR ============ -->
 <nav class="navbar">
   <div class="container">
     <a href="./index.html" class="logo-wrap">
-      <div class="logo-icon">
-        <span>WEB</span>
-        <span class="logo-main-text">CODE</span>
-        <span>INSTITUTE</span>
-      </div>
+      <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 3px solid #000000;">
       <div class="logo-text-group">
         <div class="logo-title">WEBCODE</div>
         <div class="logo-subtitle">Institute of IT &amp; Languages</div>
       </div>
     </a>
 
-   <ul class="nav-links" id="navLinks">
+    <ul class="nav-links" id="navLinks">
       <li><a href="./index.html">Home</a></li>
       <li><a href="./about-us.html">About Us</a></li>
       <li><a href="./Courses.html">Courses</a></li>
@@ -688,10 +622,9 @@ img { max-width: 100%; display: block; }
     <div class="nav-right">
       <div class="nav-actions">
         <a href="./Admissions.html" class="btn-header">Apply Now</a>
-        <a href="./admin.html" class="btn-header">Admin Login</a>
+        <a href="#" onclick="logoutUser()" class="btn-header" style="background-color: #ef4444; color: white;">Logout</a>
       </div>
 
-      <!-- THEME TOGGLE BUTTON -->
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.5 4.93l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zm13.46 13.46l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zM1 11h3v2H1v-2zm19 0h3v2h-3v-2zM4.93 19.5l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13zM18.38 6.04l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13z"/>
@@ -710,7 +643,6 @@ img { max-width: 100%; display: block; }
   </div>
 </nav>
 
-<!-- ============ HERO SECTION ============ -->
 <section class="hero">
   <div class="container">
     <span class="section-tag">Our Gallery</span>
@@ -719,7 +651,6 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============ GALLERY SECTION ============ -->
 <section class="gallery-section">
   <div class="container">
     
@@ -731,12 +662,10 @@ img { max-width: 100%; display: block; }
 
     <div class="gallery-grid">
       
-      <!-- Item 1: Corridor (Top Left, spans 2 cols) -->
       <div class="gallery-item span-2-cols">
         <div class="img-placeholder bg-corridor"></div>
       </div>
 
-      <!-- Item 2: Computer Lab (Top Right, spans 2 rows) -->
       <div class="gallery-item span-2-rows">
         <div class="img-placeholder bg-computer-lab"></div>
         <div class="gallery-overlay">
@@ -745,7 +674,6 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <!-- Item 3: Modern Classroom -->
       <div class="gallery-item">
         <div class="img-placeholder bg-classroom"></div>
         <div class="gallery-overlay">
@@ -754,7 +682,6 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <!-- Item 4: Institute Office -->
       <div class="gallery-item">
         <div class="img-placeholder bg-office"></div>
         <div class="gallery-overlay">
@@ -763,7 +690,6 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <!-- Item 5: Training Session -->
       <div class="gallery-item">
         <div class="img-placeholder bg-training"></div>
         <div class="gallery-overlay">
@@ -773,17 +699,15 @@ img { max-width: 100%; display: block; }
         </div>
       </div>
 
-      <!-- Item 6: Student Activities -->
       <div class="gallery-item">
         <div class="img-placeholder bg-activities"></div>
         <div class="gallery-overlay">
-          <span class="gallery-category">Student Life</span>
+          <span class="gallery-category">Students Presentation</span>
           <h3>Student Activities</h3>
           <p class="gallery-desc">Activities, teamwork and student engagement.</p>
         </div>
       </div>
 
-      <!-- Item 7: Institute Events -->
       <div class="gallery-item">
         <div class="img-placeholder bg-events"></div>
         <div class="gallery-overlay">
@@ -797,18 +721,13 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       
       <div class="footer-logo">
         <a href="./index.html" class="logo-wrap">
-          <div class="logo-icon">
-            <span>WEB</span>
-            <span class="logo-main-text">CODE</span>
-            <span>INSTITUTE</span>
-          </div>
+          <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff;">
           <div class="logo-text-group">
             <div class="logo-title">WEBCODE</div>
             <div class="logo-subtitle">Institute of IT &amp; Languages</div>
@@ -889,9 +808,11 @@ img { max-width: 100%; display: block; }
 </footer>
 
 <script>
-  /* ============================================================
-     THEME TOGGLE (Dark / Light)
-     ============================================================ */
+  function logoutUser() {
+    sessionStorage.removeItem('webcode_logged_in_user');
+    window.location.href = 'admin.html';
+  }
+
   (function () {
     const root = document.documentElement;
     const toggle = document.getElementById('themeToggle');
@@ -905,19 +826,14 @@ img { max-width: 100%; display: block; }
       try { localStorage.setItem('webcode-theme', theme); } catch (e) {}
     }
 
-    // Set initial state
     applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
-    // Toggle on click
     toggle.addEventListener('click', function () {
       const isDark = root.getAttribute('data-theme') === 'dark';
       applyTheme(isDark ? 'light' : 'dark');
     });
   })();
 
-  /* ============================================================
-     MOBILE MENU
-     ============================================================ */
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const navLinks = document.getElementById('navLinks');
 

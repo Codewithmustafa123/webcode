@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Courses - WEBCODE Institute</title>
+<script>
+  if (!sessionStorage.getItem('webcode_logged_in_user')) {
+    window.location.href = 'admin.html';
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-  /* Theme load before paint (prevents flash) */
   (function () {
     try {
       var t = localStorage.getItem('webcode-theme');
@@ -19,7 +23,6 @@
   })();
 </script>
 <style>
-/* ============ RESET & VARIABLES ============ */
 *,
 *::before,
 *::after {
@@ -46,7 +49,6 @@
   --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
 }
 
-/* ============ DARK THEME ============ */
 [data-theme="dark"] {
   color-scheme: dark;
   --navy-dark: #0e1a33;
@@ -64,17 +66,6 @@
   --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
 }
 
-/* Dark Mode Specific Fixes */
-[data-theme="dark"] .logo-icon {
-  background-color: #ffffff;
-  border-color: #081431;
-}
-[data-theme="dark"] .logo-icon::before {
-  border-color: #081431;
-}
-[data-theme="dark"] .logo-icon span {
-  color: #081431;
-}
 [data-theme="dark"] .logo-title,
 [data-theme="dark"] .nav-links a,
 [data-theme="dark"] .mobile-menu-btn span {
@@ -87,13 +78,11 @@
   color: #081431;
 }
 
-/* Tags */
 [data-theme="dark"] .tag {
   background-color: #1c2740;
   color: #cbd5e1;
 }
 
-/* Apply Button Inside Card */
 [data-theme="dark"] .btn-apply {
   background-color: #16264a;
   color: #ffffff;
@@ -103,17 +92,6 @@
   color: #081431;
 }
 
-/* Footer Logo Fix */
-[data-theme="dark"] .footer-logo .logo-icon {
-  background-color: #ffffff !important;
-  border-color: #081431 !important;
-}
-[data-theme="dark"] .footer-logo .logo-icon::before {
-  border-color: #081431 !important;
-}
-[data-theme="dark"] .footer-logo .logo-icon span {
-  color: #081431 !important;
-}
 [data-theme="dark"] .footer-logo .logo-title {
   color: #ffffff !important;
 }
@@ -139,7 +117,6 @@ img { max-width: 100%; display: block; }
   padding: 0 24px;
 }
 
-/* ============ TOP BAR ============ */
 .topbar {
   background-color: var(--navy-dark);
   color: #e2e8f0;
@@ -167,7 +144,6 @@ img { max-width: 100%; display: block; }
 .topbar-item:hover { color: var(--gold); }
 .topbar-item svg { width: 14px; height: 14px; fill: var(--gold); }
 
-/* ============ NAVBAR ============ */
 .navbar {
   background-color: var(--bg-white);
   padding: 15px 0;
@@ -184,43 +160,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
 }
 
-/* Logo */
 .logo-wrap { display: flex; align-items: center; gap: 12px; }
-
-.logo-icon {
-  width: 54px; height: 54px;
-  background-color: var(--bg-white);
-  border: 2px solid var(--navy-dark);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: border-color 0.35s ease, background-color 0.35s ease;
-}
-
-.logo-icon::before {
-  content: '';
-  position: absolute;
-  top: 3px; left: 3px; right: 3px; bottom: 3px;
-  border: 1px solid var(--navy-dark);
-  border-radius: 50%;
-  pointer-events: none;
-  transition: border-color 0.35s ease;
-}
-
-.logo-icon span {
-  font-size: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--navy-dark);
-  line-height: 1.1;
-  text-align: center;
-  transition: color 0.35s ease;
-}
-
-.logo-icon .logo-main-text { font-size: 11px; font-weight: 800; }
 .logo-text-group { display: flex; flex-direction: column; }
 
 .logo-title {
@@ -251,7 +191,6 @@ img { max-width: 100%; display: block; }
 
 .nav-links a:hover, .nav-links a.active { color: var(--gold); font-weight: 600; }
 
-/* Nav Right */
 .nav-right { display: flex; align-items: center; gap: 15px; }
 .nav-actions { display: flex; gap: 12px; }
 
@@ -300,7 +239,6 @@ img { max-width: 100%; display: block; }
   transform: translateY(-2px);
 }
 
-/* ===== THEME TOGGLE BUTTON ===== */
 .theme-toggle {
   position: relative;
   width: 40px; height: 40px; flex-shrink: 0;
@@ -343,7 +281,6 @@ img { max-width: 100%; display: block; }
   transition: background-color 0.35s ease;
 }
 
-/* ============ HERO SECTION ============ */
 .hero {
   background-color: var(--hero-blue);
   padding: 90px 0 110px;
@@ -384,7 +321,6 @@ img { max-width: 100%; display: block; }
   font-weight: 400;
 }
 
-/* ============ COURSES SECTION ============ */
 .courses-section {
   padding: 100px 0 120px;
   background-color: var(--bg-white);
@@ -397,7 +333,6 @@ img { max-width: 100%; display: block; }
   gap: 30px;
 }
 
-/* Card Styles */
 .course-card {
   background: var(--bg-card);
   border-radius: 16px;
@@ -416,7 +351,6 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow-lg);
 }
 
-/* Top Gradient Line */
 .card-top-line {
   height: 6px;
   width: 100%;
@@ -521,7 +455,6 @@ img { max-width: 100%; display: block; }
   fill: currentColor;
 }
 
-/* ============ FOOTER ============ */
 .footer {
   background-color: var(--navy-dark);
   color: #94a3b8;
@@ -648,7 +581,6 @@ img { max-width: 100%; display: block; }
 .footer-bottom-links a { transition: color 0.3s; }
 .footer-bottom-links a:hover { color: var(--gold); }
 
-/* ============ RESPONSIVE DESIGN ============ */
 @media (max-width: 1024px) {
   .hero h1 { font-size: 52px; }
   .courses-grid { grid-template-columns: repeat(2, 1fr); }
@@ -690,7 +622,6 @@ img { max-width: 100%; display: block; }
 </head>
 <body>
 
-<!-- ============ TOP BAR ============ -->
 <div class="topbar">
   <div class="container">
     <div class="topbar-left">
@@ -709,15 +640,10 @@ img { max-width: 100%; display: block; }
   </div>
 </div>
 
-<!-- ============ NAVBAR ============ -->
 <nav class="navbar">
   <div class="container">
     <a href="./index.html" class="logo-wrap">
-      <div class="logo-icon">
-        <span>WEB</span>
-        <span class="logo-main-text">CODE</span>
-        <span>INSTITUTE</span>
-      </div>
+      <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 3px solid #000000;">
       <div class="logo-text-group">
         <div class="logo-title">WEBCODE</div>
         <div class="logo-subtitle">Institute of IT &amp; Languages</div>
@@ -737,10 +663,9 @@ img { max-width: 100%; display: block; }
     <div class="nav-right">
       <div class="nav-actions">
         <a href="./Admissions.html" class="btn-header">Apply Now</a>
-        <a href="./admin.html" class="btn-header">Admin Login</a>
+        <a href="#" onclick="logoutUser()" class="btn-header" style="background-color: #ef4444; color: white;">Logout</a>
       </div>
 
-      <!-- THEME TOGGLE BUTTON -->
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.5 4.93l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zm13.46 13.46l1.42-1.42 2.12 2.12-1.41 1.42-2.13-2.12zM1 11h3v2H1v-2zm19 0h3v2h-3v-2zM4.93 19.5l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13zM18.38 6.04l-1.42-1.42 2.12-2.12 1.42 1.41-2.12 2.13z"/>
@@ -759,7 +684,6 @@ img { max-width: 100%; display: block; }
   </div>
 </nav>
 
-<!-- ============ HERO SECTION ============ -->
 <section class="hero">
   <div class="container">
     <span class="section-tag">Our Courses</span>
@@ -768,12 +692,10 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============ COURSES SECTION ============ -->
 <section class="courses-section">
   <div class="container">
     <div class="courses-grid">
       
-      <!-- Course 1: DIT -->
       <article class="course-card">
         <div class="card-top-line"></div>
         <div class="card-body">
@@ -799,7 +721,6 @@ img { max-width: 100%; display: block; }
         </div>
       </article>
 
-      <!-- Course 2: CIT -->
       <article class="course-card">
         <div class="card-top-line"></div>
         <div class="card-body">
@@ -825,7 +746,6 @@ img { max-width: 100%; display: block; }
         </div>
       </article>
 
-      <!-- Course 3: OAT -->
       <article class="course-card">
         <div class="card-top-line"></div>
         <div class="card-body">
@@ -855,19 +775,13 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       
-      <!-- Column 1: Logo & Desc -->
       <div class="footer-logo">
         <a href="./index.html" class="logo-wrap">
-          <div class="logo-icon">
-            <span>WEB</span>
-            <span class="logo-main-text">CODE</span>
-            <span>INSTITUTE</span>
-          </div>
+          <img src="./webcode logo.jpg" alt="WEBCODE Logo" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff;">
           <div class="logo-text-group">
             <div class="logo-title">WEBCODE</div>
             <div class="logo-subtitle">Institute of IT &amp; Languages</div>
@@ -878,20 +792,15 @@ img { max-width: 100%; display: block; }
           <a href="https://www.facebook.com/profile.php?id=61578404112118" aria-label="Facebook" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
           </a>
-
-         <a href="https://www.tiktok.com/@sain_07860" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-            <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-          </svg>
-        </a>
-
+          <a href="https://www.tiktok.com/@sain_07860" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
           <a href="https://wa.me/92101391632" aria-label="WhatsApp" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           </a>
         </div>
       </div>
 
-      <!-- Column 2: Quick Links -->
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul class="footer-links">
@@ -905,7 +814,6 @@ img { max-width: 100%; display: block; }
         </ul>
       </div>
 
-      <!-- Column 3: Our Courses -->
       <div class="footer-col">
         <h4>Our Courses</h4>
         <ul class="footer-links">
@@ -915,7 +823,6 @@ img { max-width: 100%; display: block; }
         </ul>
       </div>
 
-      <!-- Column 4: Contact Us -->
       <div class="footer-col">
         <h4>Contact Us</h4>
         <ul class="footer-contact">
@@ -943,7 +850,6 @@ img { max-width: 100%; display: block; }
     </div>
   </div>
 
-  <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="container">
       <div>© 2026 <strong>WebCode Institute</strong>. All Rights Reserved.</div>
@@ -956,9 +862,11 @@ img { max-width: 100%; display: block; }
 </footer>
 
 <script>
-  /* ============================================================
-     THEME TOGGLE (Dark / Light)
-     ============================================================ */
+  function logoutUser() {
+    sessionStorage.removeItem('webcode_logged_in_user');
+    window.location.href = 'admin.html';
+  }
+
   (function () {
     const root = document.documentElement;
     const toggle = document.getElementById('themeToggle');
@@ -972,19 +880,14 @@ img { max-width: 100%; display: block; }
       try { localStorage.setItem('webcode-theme', theme); } catch (e) {}
     }
 
-    // Set initial state
     applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
-    // Toggle on click
     toggle.addEventListener('click', function () {
       const isDark = root.getAttribute('data-theme') === 'dark';
       applyTheme(isDark ? 'light' : 'dark');
     });
   })();
 
-  /* ============================================================
-     MOBILE MENU
-     ============================================================ */
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const navLinks = document.getElementById('navLinks');
 
