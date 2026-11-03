@@ -251,6 +251,10 @@ img { max-width: 100%; display: block; }
   transition: background-color 0.35s ease;
 }
 
+.mobile-menu-actions {
+  display: none;
+}
+
 .hero {
   background-color: var(--hero-blue);
   padding: 90px 0 110px;
@@ -410,6 +414,38 @@ img { max-width: 100%; display: block; }
   font-weight: 300;
 }
 
+.lightbox {
+  display: none; 
+  position: fixed; 
+  z-index: 9999; 
+  inset: 0; 
+  background: rgba(0,0,0,0.9); 
+  justify-content: center; 
+  align-items: center;
+}
+
+.lightbox img { 
+  max-width: 90%; 
+  max-height: 90vh; 
+  border-radius: 10px; 
+  box-shadow: 0 0 20px rgba(255,255,255,0.2); 
+  object-fit: contain; 
+}
+
+.lightbox .close-btn { 
+  position: absolute; 
+  top: 20px; 
+  right: 30px; 
+  color: #fff; 
+  font-size: 40px; 
+  cursor: pointer; 
+  transition: 0.3s; 
+}
+
+.lightbox .close-btn:hover { 
+  color: var(--gold); 
+}
+
 .footer {
   background-color: var(--navy-dark);
   color: #94a3b8;
@@ -565,6 +601,14 @@ img { max-width: 100%; display: block; }
     border-bottom: 1px solid var(--border-color);
   }
 
+  .mobile-menu-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+  }
+
   .hero { padding: 70px 0 90px; }
   .hero h1 { font-size: 38px; }
   .hero p { font-size: 16px; }
@@ -617,6 +661,10 @@ img { max-width: 100%; display: block; }
       <li><a href="./faculty.html">Faculty</a></li>
       <li><a href="./Gallery.html" class="active">Gallery</a></li>
       <li><a href="./Contact.html">Contact</a></li>
+      <li class="mobile-menu-actions">
+        <a href="./Admissions.html" class="btn-header" style="width: 100%; margin-bottom: 10px;">Apply Now</a>
+        <a href="#" onclick="logoutUser()" class="btn-header" style="background-color: #ef4444; color: white; width: 100%;">Logout</a>
+      </li>
     </ul>
 
     <div class="nav-right">
@@ -720,6 +768,11 @@ img { max-width: 100%; display: block; }
     </div>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox">
+  <span class="close-btn" onclick="closeLightbox()">&times;</span>
+  <img src="" id="lightbox-img" alt="Popup Image">
+</div>
 
 <footer class="footer">
   <div class="container">
@@ -839,6 +892,29 @@ img { max-width: 100%; display: block; }
 
   mobileMenuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
+  });
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.gallery-item .img-placeholder').forEach(item => {
+    item.addEventListener('click', function() {
+      const bgImage = window.getComputedStyle(this).backgroundImage;
+      const url = bgImage.slice(5, -2);
+      
+      lightbox.style.display = 'flex';
+      lightboxImg.src = url;
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+  }
+
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
   });
 </script>
 </body>
