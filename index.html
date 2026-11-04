@@ -476,6 +476,110 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 }
 [data-theme="dark"] .btn-navy:hover { background: #1d3566; }
 
+.announcement-bar {
+  position: relative;
+  background: linear-gradient(90deg, #f5b301 0%, #ffc61a 50%, #f5b301 100%);
+  background-size: 200% 100%;
+  color: #081431;
+  padding: 10px 0;
+  z-index: 1001;
+  animation: announcement-shine 6s ease infinite;
+  transition: transform 0.3s ease;
+}
+@keyframes announcement-shine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.announcement-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.announcement-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+.announcement-icon {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.announcement-content p {
+  font-size: 13px;
+  font-weight: 500;
+  color: #081431;
+  margin: 0;
+  line-height: 1.4;
+}
+.announcement-content p strong {
+  font-weight: 700;
+  color: #081431;
+}
+.announcement-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #081431;
+  color: #f5b301;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+.announcement-cta:hover {
+  background: #0f2557;
+  transform: translateY(-1px);
+}
+.announcement-close {
+  background: transparent;
+  border: none;
+  color: #081431;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+  margin-left: 4px;
+}
+.announcement-close:hover {
+  background: rgba(8, 20, 49, 0.15);
+}
+.announcement-bar.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .announcement-bar { padding: 8px 0; }
+  .announcement-content p { font-size: 12px; }
+  .announcement-icon { display: none; }
+  .announcement-cta { font-size: 11px; padding: 5px 10px; }
+  .announcement-close { width: 24px; height: 24px; font-size: 18px; }
+}
+
+@media (max-width: 480px) {
+  .announcement-bar .container {
+    padding: 0 12px;
+    gap: 8px;
+  }
+  .announcement-content p { font-size: 11px; line-height: 1.3; }
+  .announcement-cta { display: none; }
+}
+
 .whatsapp-float {
   position: fixed;
   bottom: 25px;
@@ -688,6 +792,17 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 </style>
 </head>
 <body>
+
+<div class="announcement-bar" id="announcementBar">
+  <div class="container">
+    <div class="announcement-content">
+      <span class="announcement-icon">🎓</span>
+      <p><strong>Admissions Open 2026</strong> — Limited Seats Available! Enroll Today.</p>
+      <a href="./admissions.html" class="announcement-cta">Apply Now →</a>
+    </div>
+    <button class="announcement-close" onclick="closeAnnouncement()" aria-label="Close announcement" title="Close">×</button>
+  </div>
+</div>
 
 <div class="topbar">
   <div class="container">
@@ -1269,14 +1384,12 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
     </div>
   </div>
 
-  
-
   <div class="footer-bottom">
     <div class="container">
       <div>© 2025 WebCode Institute. All Rights Reserved.</div>
       <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms &amp; Conditions</a>
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms &amp; Conditions</a>
       </div>
     </div>
   </div>
@@ -1371,6 +1484,24 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
       if (!isOpen) item.classList.add('open');
     });
   });
+
+  function closeAnnouncement() {
+    var bar = document.getElementById('announcementBar');
+    if (bar) {
+      bar.classList.add('hidden');
+      try { sessionStorage.setItem('webcode_announcement_closed', '1'); } catch(e) {}
+    }
+  }
+
+  (function () {
+    var bar = document.getElementById('announcementBar');
+    if (!bar) return;
+    try {
+      if (sessionStorage.getItem('webcode_announcement_closed') === '1') {
+        bar.classList.add('hidden');
+      }
+    } catch(e) {}
+  })();
 </script>
 </body>
 </html>
