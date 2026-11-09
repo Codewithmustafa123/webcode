@@ -1064,27 +1064,27 @@ img { max-width: 100%; display: block; }
         <span class="section-tag">Send Us a Message</span>
         <h3>How Can We Help?</h3>
         
-        <form id="contactForm">
+        <form id="contactForm" action="https://formspree.io/f/xdeerrqw" method="POST">
           <div class="form-grid">
             
             <div class="form-group">
               <label>Your Name</label>
-              <input type="text" id="contactName" placeholder="Enter your name" required>
+              <input type="text" id="contactName" name="name" placeholder="Enter your name" required>
             </div>
 
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="tel" id="contactPhone" placeholder="+92 XXX XXXXXXX" required>
+              <input type="tel" id="contactPhone" name="phone" placeholder="+92 XXX XXXXXXX" required>
             </div>
 
             <div class="form-group full-width">
               <label>Email Address</label>
-              <input type="email" id="contactEmail" placeholder="Enter your email" required>
+              <input type="email" id="contactEmail" name="email" placeholder="Enter your email" required>
             </div>
 
             <div class="form-group full-width">
               <label>Subject</label>
-              <select id="contactSubject" required>
+              <select id="contactSubject" name="subject" required>
                 <option value="" disabled selected>Select a subject</option>
                 <option value="Admissions Inquiry">Admissions Inquiry</option>
                 <option value="Course Information">Course Information</option>
@@ -1095,7 +1095,7 @@ img { max-width: 100%; display: block; }
 
             <div class="form-group full-width">
               <label>Your Message</label>
-              <textarea id="contactMessage" placeholder="Write your message..." required></textarea>
+              <textarea id="contactMessage" name="message" placeholder="Write your message..." required></textarea>
             </div>
 
             <div class="form-group full-width">
@@ -1284,44 +1284,6 @@ img { max-width: 100%; display: block; }
   mobileMenuBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
-
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById('contactName').value.trim();
-      const phone = document.getElementById('contactPhone').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const subjectEl = document.getElementById('contactSubject');
-      const subject = subjectEl.options[subjectEl.selectedIndex].text;
-      const message = document.getElementById('contactMessage').value.trim();
-
-      const whatsappNumber = "923101391632";
-
-      const text =
-        `*NEW CONTACT MESSAGE* 📩\n\n` +
-        `*Name:* ${name}\n` +
-        `*Phone:* ${phone}\n` +
-        `*Email:* ${email}\n` +
-        `*Subject:* ${subject}\n\n` +
-        `*Message:*\n${message}`;
-
-      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
-
-      const btn = document.getElementById('contactSubmitBtn');
-      const originalHTML = btn.innerHTML;
-      btn.innerHTML = '✅ Opening WhatsApp...';
-      btn.disabled = true;
-
-      setTimeout(function () {
-        contactForm.reset();
-        btn.innerHTML = originalHTML;
-        btn.disabled = false;
-      }, 2500);
-    });
-  }
 </script>
 </body>
 </html>
