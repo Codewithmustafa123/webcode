@@ -66,6 +66,13 @@
   --font-main: 'Poppins', sans-serif;
 }
 
+/* GLOBAL FIX FOR HORIZONTAL SCROLL */
+html, body {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100vw;
+}
+
 html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{
   font-family: var(--font-main);
@@ -73,7 +80,6 @@ body{
   line-height: 1.6;
   background-color: var(--bg-white);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 a{text-decoration:none;color:inherit}
 ul{list-style:none}
@@ -263,6 +269,25 @@ section{padding:90px 0;position:relative}
 .hero-dots button.active { width: 24px; border-radius: 10px; background: var(--gold); }
 
 /* ═══════════════════════════════════════
+   ADMISSION POSTER SECTION
+   ═══════════════════════════════════════ */
+.admission-banner-section { padding: 60px 0; background: var(--bg-light); }
+.admission-banner-box { 
+  max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; 
+  gap: 40px; background: var(--bg-white); border-radius: 20px; padding: 30px; 
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid var(--border-color);
+}
+.admission-img-wrap { flex: 1; min-width: 300px; }
+.admission-img-wrap img { width: 100%; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+.admission-content { flex: 1; min-width: 300px; }
+.admission-content .section-tag { color: var(--gold); }
+.admission-content h2 { font-size: 36px; color: var(--navy-dark); margin: 15px 0; line-height: 1.2; font-weight: 800; }
+.admission-content h2 span { color: var(--gold); }
+.admission-content p { color: var(--text-gray); margin-bottom: 25px; font-size: 15px; line-height: 1.7; }
+.admission-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+[data-theme="dark"] .admission-content h2 { color: var(--text-dark); }
+
+/* ═══════════════════════════════════════
    COMMON SECTIONS
    ═══════════════════════════════════════ */
 .welcome { background: var(--bg-white); text-align: center; }
@@ -345,6 +370,40 @@ section{padding:90px 0;position:relative}
 .mini-card svg { width: 24px; height: 24px; fill: var(--gold); flex-shrink: 0; }
 .mini-card h4 { font-size: 14px; font-weight: 600; color: var(--navy-dark); margin-bottom: 4px; }
 .mini-card p { font-size: 11px; margin: 0; line-height: 1.4; }
+
+/* ═══════════════════════════════════════
+   VIDEO SECTION (NEW)
+   ═══════════════════════════════════════ */
+.video-section {
+  background: var(--bg-white);
+  padding: 90px 0;
+  text-align: center;
+}
+.video-header {
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+.video-box {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(7, 16, 38, 0.2);
+  border: 4px solid var(--navy-dark);
+  background: #000;
+}
+.video-box video {
+  width: 100%;
+  height: auto;
+  display: block;
+  outline: none;
+}
+[data-theme="dark"] .video-box {
+  border-color: var(--border-color);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
 
 /* ═══════════════════════════════════════
    STATS (with counter animation)
@@ -645,7 +704,7 @@ section{padding:90px 0;position:relative}
   --border-color: #1c2740;
 }
 
-body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial-card {
+body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial-card, .admission-banner-box {
   transition: background-color .35s ease, border-color .35s ease, color .35s ease;
 }
 
@@ -876,24 +935,68 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE
+   ADMISSION POPUP CSS
    ═══════════════════════════════════════ */
-@media (max-width: 768px) {
-  .announcement-bar { padding: 8px 0; }
-  .announcement-content p { font-size: 12px; }
-  .announcement-icon { display: none; }
-  .announcement-cta { font-size: 11px; padding: 5px 10px; }
-  .announcement-close { width: 24px; height: 24px; font-size: 18px; }
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
-@media (max-width: 480px) {
-  .announcement-bar .container { padding: 0 12px; gap: 8px; }
-  .announcement-content p { font-size: 11px; line-height: 1.3; }
-  .announcement-cta { display: none; }
-  .whatsapp-float { width: 55px; height: 55px; bottom: 20px; right: 20px; }
-  .whatsapp-float svg { width: 30px; height: 30px; }
-  .whatsapp-float::before { display: none; }
+.popup-content {
+  background: var(--bg-white);
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  animation: popupZoom 0.4s ease;
+  overflow: hidden;
 }
+@keyframes popupZoom {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.popup-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: #ef4444; color: #fff;
+  width: 35px; height: 35px;
+  border-radius: 50%;
+  font-size: 24px; font-weight: bold;
+  display: flex; justify-content: center; align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.5);
+  transition: 0.3s;
+  z-index: 10;
+}
+.popup-close:hover { transform: scale(1.1) rotate(90deg); }
+.popup-img {
+  width: 100%;
+  display: block;
+}
+.popup-btn {
+  display: block;
+  background: var(--gold);
+  color: var(--navy-dark);
+  padding: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.popup-btn:hover { background: var(--gold-hover); }
 
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS & OVERFLOW FIXES (UPDATED)
+   ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .welcome-grid, .about-grid, .why-grid { grid-template-columns: 1fr; gap: 40px; }
   .course-grid, .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
@@ -914,8 +1017,6 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 }
 
 @media (max-width: 768px) {
-  section { padding: 60px 0; }
-  .container { padding: 0 18px; }
   .topbar { display: none; }
   .nav-links, .nav-actions { display: none; }
   .mobile-menu-btn { display: flex; }
@@ -987,6 +1088,22 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   .footer-bottom .container { flex-direction: column; gap: 10px; text-align: center; }
   .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
   .footer-desc { max-width: 100%; }
+  .admission-content h2 { font-size: 28px; }
+  
+  .video-section { padding: 60px 0; }
+  .video-box { border-width: 2px; border-radius: 12px; }
+  
+  /* EXACT FIXES FOR OVERFLOW */
+  .container { padding: 0 15px !important; }
+  .admission-banner-box { padding: 20px !important; gap: 20px !important; flex-direction: column !important; }
+  .admission-img-wrap, .admission-content { min-width: 100% !important; width: 100% !important; flex: none; }
+  .admission-btns { flex-direction: column; width: 100%; }
+  .admission-btns .btn { width: 100%; justify-content: center; }
+  
+  .hero-content { width: 100% !important; max-width: 100% !important; }
+  .hero-btns .btn { width: 100%; }
+  
+  .video-box { width: 100% !important; max-width: 100% !important; }
 }
 
 @media (max-width: 480px) {
@@ -1009,6 +1126,15 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
 </style>
 </head>
 <body>
+
+<!-- ADMISSION POPUP -->
+<div id="admissionPopup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="popup-close" onclick="closeAdmissionPopup()">&times;</span>
+    <img src="./admission-poster.jpg" alt="WebCode Admissions Open" class="popup-img">
+    <a href="./admissions.html" class="popup-btn">Apply Online Now →</a>
+  </div>
+</div>
 
 <div class="announcement-bar" id="announcementBar">
   <div class="container">
@@ -1115,6 +1241,25 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
   <button class="hero-arrow prev" id="heroPrev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
   <button class="hero-arrow next" id="heroNext" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<section class="admission-banner-section reveal">
+  <div class="container">
+    <div class="admission-banner-box">
+      <div class="admission-img-wrap">
+        <img src="./admission-poster.jpg" alt="Admissions Open at WebCode Institute">
+      </div>
+      <div class="admission-content">
+        <span class="section-tag">Join WebCode Institute</span>
+        <h2>Admissions Are <br><span>Open Now!</span></h2>
+        <p>Secure your bright future with our practical and career-focused courses. Limited seats available for DIT, CIT, Web Development, MS Office, and English Language.</p>
+        <div class="admission-btns">
+          <a href="./admissions.html" class="btn btn-gold">Apply Online Now →</a>
+          <a href="https://wa.me/923101391632?text=Assalam%20o%20Alaikum%20WebCode%20Institute!%20Mujhe%20admission%20ki%20maloomat%20chahiye." target="_blank" class="btn btn-navy">WhatsApp Us 💬</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="welcome">
@@ -1252,6 +1397,31 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
         <a href="./about-us.html" class="btn btn-navy">Discover More →</a>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     VIDEO SECTION (NEW)
+     ═══════════════════════════════════════ -->
+<section class="video-section">
+  <div class="container">
+    <div class="video-header reveal">
+      <span class="section-tag">CAMPUS TOUR</span>
+      <h2 class="section-title">Take a Look Inside <br><span>WebCode Institute</span></h2>
+      <p class="section-desc">See our modern computer lab, classrooms, and the environment where students learn and grow.</p>
+    </div>
+
+    <div class="video-wrapper reveal-scale">
+      <div class="video-box">
+        
+        <!-- Video Player -->
+        <video controls playsinline preload="metadata" poster="./subb.jpg">
+          <source src="./admisson.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+      </div>
     </div>
   </div>
 </section>
@@ -1433,7 +1603,7 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
         </div>
       </div>
       <div class="gallery-item reveal-scale reveal-delay-2">
-        <img src="./za.jpg" alt="Classroom">
+        <img src="./classroom.jpg" alt="Classroom">
         <div class="gallery-overlay">
           <span>Education</span>
           <h4>Classroom</h4>
@@ -1808,7 +1978,7 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
     function tick(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
       const currentNum = Math.floor(eased * endNum);
 
       let display = currentNum.toString();
@@ -1856,6 +2026,22 @@ body, section, .navbar, .topbar, .footer, .mini-card, .feature-box, .testimonial
     const statsGrid = document.querySelector('.stats-grid');
     if (statsGrid) statObserver.observe(statsGrid);
   });
+
+  // ═══════════════════════════════════════════════
+  // POPUP LOGIC
+  // ═══════════════════════════════════════════════
+  window.addEventListener('load', function() {
+    if (!sessionStorage.getItem('popupClosed')) {
+      setTimeout(function() {
+        document.getElementById('admissionPopup').style.display = 'flex';
+      }, 1500);
+    }
+  });
+
+  function closeAdmissionPopup() {
+    document.getElementById('admissionPopup').style.display = 'none';
+    sessionStorage.setItem('popupClosed', 'true');
+  }
 </script>
 </body>
 </html>
